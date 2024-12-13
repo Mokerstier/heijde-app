@@ -5,13 +5,31 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "format": "prettier --log-level warn --write \"{assets,components,layouts,pages,server,utils}/**/*.{ts,scss,vue}\"",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "nuxt": "^3.14.159",
+    "@nuxt/image": "^1.8.1",
+    "@nuxtjs/auth-next": "^5.0.0-1667386184.dfbbb54",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "nuxt": "^3.8.2",
+    "nuxt-mongoose": "^1.0.6",
+    "nuxt-server-utils": "^0.0.7",
+    "sass": "^1.79.3",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "@vite-pwa/nuxt": "^0.10.6",
+    "@vitest/coverage-v8": "^2.1.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "tailwindcss": "^3.4.16",
+    "vite-svg-loader": "^5.1.0",
+    "vitest": "^2.1.1",
+    "vitest-environment-nuxt": "^1.0.1"
   }
 }
