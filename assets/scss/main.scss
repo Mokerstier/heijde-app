@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: Nico-Moji;
+        src: url('../fonts/NicoMoji/NicoMoji-Regular.ttf') format('woff2');
+        font-style: normal;
+        font-weight: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: Fira-Code;
+        src: url('../fonts/FiraCode/FiraCode-Light.ttf') format('woff2');
+        font-weight: 300;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: Fira-Code;
+        src: url('../fonts/FiraCode/FiraCode-Regular.ttf') format('woff2');
+        font-weight: 400;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: Fira-Code;
+        src: url('../fonts/FiraCode/FiraCode-Medium.ttf') format('woff2');
+        font-weight: 500;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: Fira-Code;
+        src: url('../fonts/FiraCode/FiraCode-SemiBold.ttf') format('woff2');
+        font-weight: 600;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: Fira-Code;
+        src: url('../fonts/FiraCode/FiraCode-Bold.ttf') format('woff2');
+        font-weight: 700;
+        font-display: swap;
+    }
+
+    html {
+        @apply bg-slate font-fira-code text-white;
+    }
+
+    section.container {
+        @apply py-8 lg:py-12;
+    }
+}
