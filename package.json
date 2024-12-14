@@ -10,7 +10,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d ./.output/public" 
+    "deploy": "gh-pages -d .output/public" 
   },
   "dependencies": {
     "@nuxt/image": "^1.8.1",
