@@ -1,1 +1,0 @@
-import{m as n,B as s,C as t,o as a,c as r,a as m,b as p,F as c}from"./BO5cnJbC.js";const _=n({__name:"index",setup(l){return s(),(i,e)=>{const o=t("LoginUserLogin");return a(),r(c,null,[e[0]||(e[0]=m("h1",null,"Welcome",-1)),p(o)],64)}}});export{_ as default};
