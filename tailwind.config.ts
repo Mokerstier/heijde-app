@@ -18,12 +18,6 @@ export default {
                 gray: '#ABB2BF',
                 slate: '#282C33',
             },
-            container: {
-                screens : {
-                    xl: '1280px',
-                    xxl: '1280px'
-                },
-            },
             fontFamily: {
                 'nico-moji': ['Nico-Moji', ...defaultTheme.fontFamily.serif],
                 'fira-code': ['Fira-Code', ...defaultTheme.fontFamily.mono],

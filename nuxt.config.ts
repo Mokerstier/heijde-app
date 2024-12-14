@@ -15,14 +15,7 @@ export default defineNuxtConfig({
     ],
 	css: ['@/assets/scss/main.scss'],
 	devtools: { enabled: true },
-	modules: ["nuxt-mongoose", "@nuxtjs/tailwindcss", "@nuxt/image"],
-    
-	mongoose: {
-		uri: process.env.NUXT_MONGOOSE_URI,
-		options: {},
-		modelsDir: "models",
-		devtools: true,
-	},
+	modules: ["@nuxtjs/tailwindcss", "@nuxt/image"],
 	vite: {
         css: {
             preprocessorOptions: {
