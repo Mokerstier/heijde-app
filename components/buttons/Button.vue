@@ -68,6 +68,11 @@ const htmlTag = computed(() => (asLink ? resolveComponent('NuxtLink') : 'button'
 <style lang="scss">
 .btn {
     @apply relative z-0 overflow-hidden bg-slate px-4 py-2 font-medium outline outline-1 outline-primary transition-all hover:outline-none active:scale-95;
+    filter: drop-shadow(0 0 0.75rem #54d38946);
+
+    &:hover {
+        filter: drop-shadow(0 0 0.75rem #54d389be);
+    }
 
     &:hover::before {
         content: '';
