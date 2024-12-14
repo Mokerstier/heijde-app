@@ -8,7 +8,7 @@
                 </span>
                 <span class="block text-primary"> front-end developer </span>
             </h1>
-            <p class="text-gray mb-6">
+            <p class="mb-6 text-gray">
                 He builds accesible user experiences, that adds value to your business
             </p>
             <Button>Contact me!</Button>
@@ -25,7 +25,7 @@
                     src="images/hero-img.png"></NuxtImg>
             </div>
             <SvgComponent
-                class="h-21 w-21 absolute bottom-20 right-0 md:right-5"
+                class="absolute bottom-20 right-0 h-21 w-21 md:right-5"
                 icon="Dots"></SvgComponent>
         </div>
     </section>

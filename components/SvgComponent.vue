@@ -3,7 +3,15 @@
 </template>
 
 <script setup lang="ts">
-const icons = ['email', 'Dots', 'Github', 'Landmark', 'Linkedin', 'w-logo-outline'] as const;
+const icons = [
+    'email',
+    'Dots',
+    'Github',
+    'Landmark',
+    'Linkedin',
+    'w-logo-outline',
+    'quote',
+] as const;
 
 export type Icon = (typeof icons)[number];
 
