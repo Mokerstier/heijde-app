@@ -1,7 +1,8 @@
 <template>
     <header class="flex">
         <h2 class="relative inline text-xl lg:text-3xl">
-            <span class="text-primary">#</span>{{ title }}
+            <span class="text-primary">{{ prefix ?? '#' }}</span
+            >{{ title }}
         </h2>
         <NuxtLink v-if="link" :to="link.url" class="ml-auto">{{ link.label }}</NuxtLink>
     </header>
@@ -9,6 +10,7 @@
 <script lang="ts" setup>
 const props = defineProps<{
     title: string;
+    prefix?: string;
     link?: {
         url: string;
         label: string;
