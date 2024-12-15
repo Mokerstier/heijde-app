@@ -1,5 +1,7 @@
 <template>
-    <h1>Blog</h1>
+    <section class="container">
+        <Header prefix="/" title="blogs" sub-title="Under construction"></Header>
+    </section>
 </template>
 <script lang="ts" setup>
 // const posts = await listBlogs();

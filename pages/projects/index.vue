@@ -1,3 +1,5 @@
 <template>
-    <h1>Projects</h1>
+    <section class="container">
+        <Header prefix="/" title="projects" sub-title="Under construction"></Header>
+    </section>
 </template>

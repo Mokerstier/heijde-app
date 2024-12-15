@@ -1,3 +1,5 @@
 <template>
-    <h1>Contact</h1>
+    <section class="container">
+        <Header prefix="/" title="contact" sub-title="Under construction"></Header>
+    </section>
 </template>
