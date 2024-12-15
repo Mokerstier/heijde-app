@@ -6,34 +6,15 @@
                     <NuxtImg class="h-4 w-4" src="W-logo-light.svg" /> Wouter
                 </NuxtLink>
             </li>
-            <li class="ml-auto hidden md:block">
-                <NuxtLink active-class="text-white" class="underline-animation text-gray" to="/"
-                    ><span class="text-primary">#</span>home</NuxtLink
-                >
-            </li>
-            <li class="hidden md:block">
-                <NuxtLink
+            <li v-for="route in routes" class="hidden md:block [&:nth-child(2)]:ml-auto">
+                <Button
+                    :as-link="true"
+                    variant="secondary"
                     active-class="text-white"
                     class="underline-animation text-gray"
-                    to="/projects"
-                    ><span class="text-primary">#</span>projects</NuxtLink
-                >
-            </li>
-            <li class="hidden md:block">
-                <NuxtLink
-                    active-class="text-white"
-                    class="underline-animation text-gray"
-                    to="/about"
-                    ><span class="text-primary">#</span>about</NuxtLink
-                >
-            </li>
-            <li class="hidden md:block">
-                <NuxtLink
-                    active-class="text-white"
-                    class="underline-animation text-gray"
-                    to="/contact"
-                    ><span class="text-primary">#</span>contact</NuxtLink
-                >
+                    :to="route.to">
+                    <span> <span class="text-primary">#</span>{{ route.label }} </span>
+                </Button>
             </li>
             <li class="ml-auto block md:hidden">
                 <button
@@ -56,27 +37,11 @@
 </template>
 
 <script lang="ts" setup>
-const menuIsOpen = ref(false);
+import { useNavigation } from '../composables/useNavigation';
 
+const menuIsOpen = ref(false);
+const routes = useNavigation();
 const toggleMenu = () => {
     menuIsOpen.value = !menuIsOpen.value;
 };
 </script>
-
-<style lang="scss">
-.underline-animation {
-    @apply relative;
-
-    &::after {
-        @apply absolute -bottom-1 left-0 h-0.5 w-full bg-primary;
-        content: '';
-        transform: scaleX(0);
-        transform-origin: 0 0;
-        transition: transform 0.3s;
-    }
-
-    &:hover::after {
-        transform: scaleX(1);
-    }
-}
-</style>

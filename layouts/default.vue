@@ -1,5 +1,5 @@
 <template>
-    <aside class="aside text-gray absolute left-0 top-0 hidden p-4 md:block">
+    <aside class="aside absolute left-0 top-0 hidden p-4 text-gray md:block">
         <ul>
             <li>
                 <NuxtLink
@@ -33,5 +33,15 @@
         margin-top: -16px;
         background-color: currentColor;
     }
+}
+
+.page-enter-active,
+.page-leave-active {
+    transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+    opacity: 0;
+    filter: blur(1rem);
 }
 </style>

@@ -67,37 +67,55 @@ const htmlTag = computed(() => (asLink ? resolveComponent('NuxtLink') : 'button'
 </script>
 <style lang="scss">
 .btn {
-    @apply relative z-0 overflow-hidden bg-slate px-4 py-2 font-medium outline outline-1 outline-primary transition-all hover:outline-none active:scale-95;
-    filter: drop-shadow(0 0 0.75rem #54d38946);
+    &--primary {
+        @apply relative z-0 overflow-hidden bg-slate px-4 py-2 font-medium outline outline-1 outline-primary transition-all hover:outline-none active:scale-95;
+        filter: drop-shadow(0 0 0.75rem #54d38946);
 
-    &:hover {
-        filter: drop-shadow(0 0 0.75rem #54d389be);
+        &:hover {
+            filter: drop-shadow(0 0 0.75rem #54d389be);
+        }
+
+        &:hover::before {
+            content: '';
+            position: absolute;
+            z-index: -2;
+            left: -50%;
+            top: -50%;
+            width: 200%;
+            height: 200%;
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            background-position: 0 0;
+            background-image: conic-gradient(transparent, rgba(#54d389, 1), transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
+
+        &:hover::after {
+            @apply bg-slate;
+            content: '';
+            position: absolute;
+            z-index: -1;
+            left: 1px;
+            top: 1px;
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+        }
     }
 
-    &:hover::before {
-        content: '';
-        position: absolute;
-        z-index: -2;
-        left: -50%;
-        top: -50%;
-        width: 200%;
-        height: 200%;
-        background-repeat: no-repeat;
-        border-radius: 50%;
-        background-position: 0 0;
-        background-image: conic-gradient(transparent, rgba(#54d389, 1), transparent 30%);
-        animation: rotate 4s linear infinite;
-    }
+    &--secondary {
+        @apply relative;
 
-    &:hover::after {
-        @apply bg-slate;
-        content: '';
-        position: absolute;
-        z-index: -1;
-        left: 1px;
-        top: 1px;
-        width: calc(100% - 2px);
-        height: calc(100% - 2px);
+        &::after {
+            @apply absolute -bottom-1 left-0 h-0.5 w-full bg-primary;
+            content: '';
+            transform: scaleX(0);
+            transform-origin: 0 0;
+            transition: transform 0.3s;
+        }
+
+        &:hover::after {
+            transform: scaleX(1);
+        }
     }
 }
 

@@ -4,7 +4,8 @@ import svgLoader from 'vite-svg-loader';
 export default defineNuxtConfig({
     app: {
         baseURL: '/heijde-app/',
-        buildAssetsDir: 'assets'
+        buildAssetsDir: 'assets',
+        pageTransition: { name: 'page', mode: 'out-in' }
     } ,
 	compatibilityDate: "2024-04-03",
 	components: [
@@ -13,9 +14,13 @@ export default defineNuxtConfig({
             pathPrefix: false,
         },
     ],
+    runtimeConfig: {
+        GITHUB_TOKEN: process.env.GITHUB_TOKEN
+    },
+    ssr: true,
 	css: ['@/assets/scss/main.scss'],
 	devtools: { enabled: true },
-	modules: ["@nuxtjs/tailwindcss", "@nuxt/image"],
+	modules: ["nuxt-mongoose", "@nuxtjs/tailwindcss", "@nuxt/image"],
 	vite: {
         css: {
             preprocessorOptions: {

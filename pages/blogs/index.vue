@@ -4,11 +4,13 @@
     </section>
 </template>
 <script lang="ts" setup>
-// const posts = await listBlogs();
-// if (!posts) {
-// 	throw createError({
-// 		statusCode: 404,
-// 		statusMessage: "Blog not found",
-// 	});
-// }
+import { Octokit } from 'octokit';
+const { GITHUB_TOKEN } = useRuntimeConfig();
+const octokit = new Octokit({
+    auth: GITHUB_TOKEN,
+});
+
+const blogs = await octokit.request('GET /repos/MokerStier/weekly-nerd-1920/wiki/');
+
+console.log(blogs);
 </script>
