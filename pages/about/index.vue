@@ -30,8 +30,8 @@
             <SvgComponent class="absolute left-20 top-6 h-21" icon="Dots" />
             <NuxtImg
                 fit="contain"
-                class="min-w-full border-b border-b-primary lg:min-h-[500px] lg:min-w-max"
-                src="/images/about-img-edited.png"></NuxtImg>
+                class="min-w-full scale-x-[-1] border-b border-b-primary lg:min-h-[500px] lg:min-w-max"
+                src="/images/wouter-mila-no-bg.png"></NuxtImg>
             <SvgComponent class="absolute right-16 top-2/3 h-21" icon="Dots" />
         </div>
     </section>
