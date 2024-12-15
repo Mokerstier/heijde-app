@@ -5,7 +5,7 @@
             <Quote></Quote>
         </section>
         <section class="container">
-            <Header title="skills"></Header>
+            <Header title="skills" :show-border="true"></Header>
         </section>
     </div>
 </template>
