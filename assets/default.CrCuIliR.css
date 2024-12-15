@@ -1,0 +1,1 @@
+.aside:before{display:block;height:4rem}@media (min-width:1024px){.aside:before{height:10rem}}.aside:before{background-color:currentColor;content:"";margin-left:15px;margin-top:-16px;width:2px}.page-enter-active,.page-leave-active{transition:all .4s}.page-enter-from,.page-leave-to{filter:blur(1rem);opacity:0}

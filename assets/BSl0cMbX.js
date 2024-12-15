@@ -1,0 +1,1 @@
+import{_ as t}from"./DrszJmch.js";import{_ as o,c,b as n,o as r}from"./CWREh6To.js";import"./Cf5mmVwy.js";const s={},_={class:"container"};function a(i,p){const e=t;return r(),c("section",_,[n(e,{prefix:"/",title:"projects","sub-title":"Under construction"})])}const l=o(s,[["render",a]]);export{l as default};
