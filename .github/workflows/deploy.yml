@@ -8,6 +8,8 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        env:
+            MONGODB_URI: ${{ secrets.MONGODB_URI }}
         steps:
             - uses: actions/checkout@v4
             - run: corepack enable
@@ -17,7 +19,6 @@ jobs:
             # Pick your own package manager and build script
             - run: npm install
             - run: npx nuxt build --preset github_pages
-              env: ${{ secrets.MONGODB_URI }}
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
