@@ -1,7 +1,7 @@
 <template>
     <footer class="border-t border-t-gray">
-        <section class="container grid grid-cols-2">
-            <div class="flex flex-wrap items-center gap-x-10 gap-y-4">
+        <section class="container grid lg:grid-cols-2">
+            <div class="col-span-2 flex flex-wrap items-center gap-x-10 gap-y-4 lg:col-auto">
                 <NuxtLink class="flex items-center gap-x-4" to="/">
                     <NuxtImg class="h-4 w-4" src="W-logo-light.svg" /> Wouter
                 </NuxtLink>
@@ -12,7 +12,7 @@
                 >
                 <span class="block w-full">Father && creative front-end developer</span>
             </div>
-            <div class="w-max-w ml-auto">
+            <div class="w-max-w lg-mt-0 ml-auto mt-8">
                 <h3 class="text-xl">Socials</h3>
                 <ul class="text-gray">
                     <li>

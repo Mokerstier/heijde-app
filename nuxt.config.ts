@@ -15,7 +15,7 @@ export default defineNuxtConfig({
         },
     ],
     runtimeConfig: {
-        GITHUB_TOKEN: process.env.GITHUB_TOKEN
+        GITHUB_TOKEN: process.env.NUXT_GITHUB_TOKEN
     },
     ssr: true,
 	css: ['@/assets/scss/main.scss'],
