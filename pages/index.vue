@@ -1,9 +1,12 @@
 <template>
-    <section class="bg-slate">
+    <div class="bg-slate">
         <HomeHero />
         <section class="container">
             <Quote></Quote>
         </section>
-    </section>
+        <section class="container">
+            <Header title="skills"></Header>
+        </section>
+    </div>
 </template>
 <script lang="ts" setup></script>
