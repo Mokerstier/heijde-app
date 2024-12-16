@@ -11,18 +11,21 @@
             <p class="mb-6 text-gray">
                 He builds accesible user experiences, that adds value to your business
             </p>
-            <Button>Contact me!</Button>
+            <Button :as-link="true" to="mailto:wouter.van.der.heijde@outlook.com"
+                >Contact me!</Button
+            >
         </div>
         <div class="relative z-0 flex items-center justify-center">
             <SvgComponent
                 class="absolute left-0 top-12 -z-10 h-40 w-40 md:left-5 lg:top-20"
                 icon="w-logo-outline"></SvgComponent>
-            <div class="h-[385px] w-[433px] overflow-hidden">
+            <div class="relative h-[385px] w-[433px] overflow-hidden">
                 <NuxtImg
                     class="-mt-4 w-full object-cover"
                     fit="cover"
                     top="0"
                     src="images/hero-img.png"></NuxtImg>
+                <MiniBanner label="Currently working on" highlight="Portfolio" />
             </div>
             <SvgComponent
                 class="absolute bottom-20 right-0 h-21 w-21 md:right-5"
