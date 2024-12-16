@@ -46,6 +46,10 @@
         @apply bg-slate font-fira-code text-white;
     }
 
+    * {
+        @apply box-border;
+    }
+
     section.container {
         @apply py-8 lg:py-12;
     }
