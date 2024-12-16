@@ -36,6 +36,8 @@
     </div>
 </template>
 <script lang="ts" setup>
+const { data } = await useFetch('/api/pages/homepage');
+console.log(data.value);
 useHead({
     title: 'Wouter van der Heijde',
     meta: [

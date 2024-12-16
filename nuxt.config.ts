@@ -17,6 +17,12 @@ export default defineNuxtConfig({
     runtimeConfig: {
         GITHUB_TOKEN: process.env.NUXT_GITHUB_TOKEN,
     },
+    mongoose:{
+        uri: process.env.NUXT_MONGOOSE_URI,
+        options: { 
+        },
+        devtools: true,
+    },
     ssr: true,
     css: ['@/assets/scss/main.scss'],
     devtools: { enabled: true },
