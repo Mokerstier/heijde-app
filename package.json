@@ -10,7 +10,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "predeploy": "npm run build",
-    "deploy": "gh-pages --dotfiles -d .output/public"
+    "deploy": "gh-pages --dotfiles -d .output/public",
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/w-logo.svg"
   },
   "dependencies": {
     "@nuxt/image": "^1.8.1",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@nuxtjs/axios": "^5.13.6",
+    "@vite-pwa/assets-generator": "^0.2.6",
     "@vite-pwa/nuxt": "^0.10.6",
     "@vitest/coverage-v8": "^2.1.1",
     "gh-pages": "^6.2.0",
