@@ -1,5 +1,5 @@
 <template>
-    <aside class="aside absolute left-0 top-0 hidden p-4 text-gray md:block">
+    <aside class="aside m-w-max absolute left-0 top-0 z-10 hidden p-4 text-gray md:block">
         <ul>
             <li>
                 <NuxtLink
