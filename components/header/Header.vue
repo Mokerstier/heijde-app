@@ -4,7 +4,7 @@
             <span class="text-primary">{{ prefix ?? '#' }}</span
             >{{ title }}
         </h2>
-        <span v-if="showBorder" class="h-[1px] w-full bg-primary" />
+        <span v-if="showBorder" class="animate-border h-[1px] w-full bg-primary" />
         <NuxtLink v-if="link" :to="link.url" class="ml-auto">{{ link.label }}</NuxtLink>
     </header>
     <span v-if="subTitle" class="mt-3 block text-gray">{{ subTitle }}</span>
@@ -22,10 +22,26 @@ const props = defineProps<{
 }>();
 </script>
 <style scoped lang="scss">
-h2 {
-    &::after {
-        content: '';
-        @apply absolute left-[calc(100%+16px)] top-[19px] lg:w-[200%];
+.animate-border {
+    background-image: linear-gradient(
+        to left,
+        #54d389,
+        #54d389 45%,
+        #ffffff 50%,
+        #54d389 55%,
+        #54d389
+    );
+    background-size: 250%;
+    animation: background-shift 5s infinite;
+}
+
+@keyframes background-shift {
+    0% {
+        background-position: 100%;
+    }
+    100% {
+        background-position: 0%;
     }
 }
 </style>
+
