@@ -41,3 +41,16 @@
         </section>
     </div>
 </template>
+<script setup lang="ts">
+useHead({
+    title: 'About | Wouter van der Heijde',
+    meta: [
+        {
+            name: 'description',
+            content:
+                'I’m Wouter, a passionate Front-End Developer with a love for crafting sleek, user-friendly websites and applications.',
+        },
+    ],
+});
+</script>
+
