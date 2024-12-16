@@ -10,6 +10,7 @@ const icons = [
     'Landmark',
     'Linkedin',
     'w-logo-outline',
+    'visual',
     'quote',
 ] as const;
 
