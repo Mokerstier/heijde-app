@@ -3,7 +3,6 @@ import svgLoader from 'vite-svg-loader';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     app: {
-        baseURL: '/heijde-app/',
         buildAssetsDir: 'assets',
         pageTransition: { name: 'page', mode: 'out-in' },
     },

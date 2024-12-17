@@ -15,27 +15,25 @@
   },
   "dependencies": {
     "@nuxt/image": "^1.8.1",
-    "@nuxtjs/auth-next": "^5.0.0-1667386184.dfbbb54",
     "@nuxtjs/tailwindcss": "^6.12.2",
-    "nuxt": "^3.8.2",
+    "nuxt": "^3.14.1592",
     "nuxt-mongoose": "^1.0.6",
     "nuxt-server-utils": "^0.0.7",
     "octokit": "^4.0.2",
-    "sass": "^1.79.3",
+    "sass": "^1.83.0",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@nuxtjs/axios": "^5.13.6",
     "@vite-pwa/assets-generator": "^0.2.6",
     "@vite-pwa/nuxt": "^0.10.6",
-    "@vitest/coverage-v8": "^2.1.1",
+    "@vitest/coverage-v8": "^2.1.8",
     "gh-pages": "^6.2.0",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
-    "tailwindcss": "^3.4.16",
+    "tailwindcss": "^3.4.17",
     "vite-svg-loader": "^5.1.0",
-    "vitest": "^2.1.1",
+    "vitest": "^2.1.8",
     "vitest-environment-nuxt": "^1.0.1"
   },
   "optionalDependencies": {
