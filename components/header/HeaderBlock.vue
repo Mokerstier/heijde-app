@@ -19,7 +19,7 @@ export type Header = {
         label: string;
     };
     showBorder?: boolean;
-    subTitle: string;
+    subTitle?: string;
 };
 
 defineProps<Header>();

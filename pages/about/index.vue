@@ -39,6 +39,7 @@
                 <SvgComponent class="absolute right-16 top-2/3 h-21" icon="Dots" />
             </div>
         </section>
+        <FunFacts />
     </div>
 </template>
 <script setup lang="ts">
