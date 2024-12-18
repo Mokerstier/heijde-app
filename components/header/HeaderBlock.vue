@@ -10,6 +10,17 @@
     <span v-if="subTitle" class="mt-3 block text-gray">{{ subTitle }}</span>
 </template>
 <script lang="ts" setup>
+export type Header = {
+    title: string;
+    prefix?: string;
+    link?: {
+        url: string;
+        label: string;
+    };
+    showBorder: boolean;
+    subTitle: string;
+};
+
 const props = defineProps<{
     title: string;
     prefix?: string;
@@ -17,9 +28,13 @@ const props = defineProps<{
         url: string;
         label: string;
     };
-    subTitle?: string;
-    showBorder?: boolean;
+    showBorder: boolean;
+    subTitle: string;
 }>();
+
+onMounted(() => {
+    console.log(props);
+});
 </script>
 <style scoped lang="scss">
 .animate-border {
@@ -44,4 +59,3 @@ const props = defineProps<{
     }
 }
 </style>
-

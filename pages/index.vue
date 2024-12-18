@@ -11,7 +11,7 @@
 import { usePageData } from '~/composables/usePageData';
 
 const data = await usePageData('home');
-console.log(data.value.template.components.SkillBlock);
+console.log(data.value.template);
 useHead({
     title: 'Wouter van der Heijde',
     meta: [
