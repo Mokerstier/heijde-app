@@ -17,7 +17,7 @@ export type Header = {
         url: string;
         label: string;
     };
-    showBorder: boolean;
+    showBorder?: boolean;
     subTitle: string;
 };
 
@@ -28,7 +28,7 @@ const props = defineProps<{
         url: string;
         label: string;
     };
-    showBorder: boolean;
+    showBorder?: boolean;
     subTitle: string;
 }>();
 

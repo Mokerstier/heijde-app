@@ -37,6 +37,7 @@ export default defineNuxtConfig({
     },
     pwa: {
         manifest: {
+            theme_color: '#282c33',
             display: 'standalone',
             start_url: '/',
             icons: [

@@ -1,11 +1,12 @@
 <template>
-    <section class="container">
-        <Header
-            prefix="/"
-            title="projects"
-            sub-title="An overview of my most recent projects"></Header>
-
-        <div class="grid gap-2 lg:grid-cols-3">
+    <div>
+        <section class="container">
+            <HeaderBlock
+                prefix="/"
+                title="projects"
+                sub-title="An overview of my most recent projects"></HeaderBlock>
+        </section>
+        <section class="mt- container grid gap-2 lg:grid-cols-3">
             <article
                 class="flex flex-col items-center border border-gray p-2"
                 v-for="(repo, index) in data">
@@ -16,8 +17,8 @@
                     >Github Link</Button
                 >
             </article>
-        </div>
-    </section>
+        </section>
+    </div>
 </template>
 <script lang="ts" setup>
 import type { RepoOutline } from '~/server/api/github';

@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="container">
-            <Header prefix="/" title="about me" sub-title="who am I?"></Header>
+            <HeaderBlock prefix="/" title="about me" sub-title="who am I?"></HeaderBlock>
         </section>
         <section class="container grid gap-4 text-gray lg:grid-cols-2">
             <div class="flex flex-col gap-4">
