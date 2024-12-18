@@ -5,7 +5,7 @@ export const PageSchema = defineMongooseModel({
         alias:{ 
             type: 'string'
         },
-        pageData: {
+        template: {
             sections: {
                 type: Array,
             }

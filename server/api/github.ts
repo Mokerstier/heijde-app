@@ -6,6 +6,7 @@ export type RepoOutline = {
     language: string | null;
     updated_at: string;
     homepage: string | null;
+    languages_url: string | null;
 };
 
 export default defineEventHandler(async (event) => {
@@ -32,12 +33,14 @@ export default defineEventHandler(async (event) => {
 });
 
 const transformRepoOutline = (repo: any): RepoOutline => {
+    console.log(repo)
     return {
         name: repo.name,
         description: repo.description,
         language: repo.language,
         updated_at: repo.updated_at,
-        homepage: repo.homepage,
+        homepage: repo.html_url,
+        languages_url: repo.languages_url
     };
 };
 
