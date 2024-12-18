@@ -10,6 +10,4 @@
         </span>
     </div>
 </template>
-<script>
-import SvgComponent from '../SvgComponent.vue';
-</script>
+<script></script>

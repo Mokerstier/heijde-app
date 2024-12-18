@@ -11,13 +11,13 @@
             <div class="grid items-center gap-4 md:grid-cols-2">
                 <div class="flex flex-col gap-4">
                     <SkillCard
-                        v-for="card in Cards.slice(0, 2)"
+                        v-for="card in SkillCards.Cards.slice(0, 2)"
                         :title="card.title"
                         :skills="card.skills" />
                 </div>
                 <div class="flex flex-col gap-4">
                     <SkillCard
-                        v-for="card in Cards.slice(2)"
+                        v-for="card in SkillCards.Cards.slice(2)"
                         :title="card.title"
                         :skills="card.skills" />
                 </div>
@@ -26,11 +26,14 @@
     </section>
 </template>
 <script lang="ts" setup>
-import type { SkillBlock } from '~/server/models/page.schema';
+import type { ChildrenProps, SkillBlock, Visual } from '~/server/models/page.schema';
+import type { Header } from '../header/HeaderBlock.vue';
 
-const props = defineProps<{
-    components?: SkillBlock;
-}>();
-if (props.components === undefined) throw Error;
-const { Header, Visual, Cards } = props.components;
+const props = defineProps<SkillBlock>();
+if (props === undefined) throw Error;
+const [Header, Visual, SkillCards]: [
+    ChildrenProps['Header'],
+    ChildrenProps['Visual'],
+    ChildrenProps['SkillCards'],
+] = props.children;
 </script>
