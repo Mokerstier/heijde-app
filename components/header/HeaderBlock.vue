@@ -11,6 +11,7 @@
 </template>
 <script lang="ts" setup>
 export type Header = {
+    alias?: string;
     title: string;
     prefix?: string;
     link?: {
@@ -21,20 +22,7 @@ export type Header = {
     subTitle: string;
 };
 
-const props = defineProps<{
-    title: string;
-    prefix?: string;
-    link?: {
-        url: string;
-        label: string;
-    };
-    showBorder?: boolean;
-    subTitle: string;
-}>();
-
-onMounted(() => {
-    console.log(props);
-});
+defineProps<Header>();
 </script>
 <style scoped lang="scss">
 .animate-border {

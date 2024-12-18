@@ -4,14 +4,17 @@
         <section class="container">
             <Quote></Quote>
         </section>
-        <SkillBlock :components="data.template.components.SkillBlock" />
+        <SkillBlock
+            v-bind="
+                data.template.find((element) => element.alias === 'SkillBlock') as SkillBlock
+            " />
     </div>
 </template>
 <script lang="ts" setup>
 import { usePageData } from '~/composables/usePageData';
-
+import type { SkillBlock } from '~/server/models/page.schema';
 const data = await usePageData('home');
-console.log(data.value.template);
+
 useHead({
     title: 'Wouter van der Heijde',
     meta: [

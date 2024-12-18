@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <Header prefix="/" title="contact" sub-title="Under construction"></Header>
+        <HeaderBlock prefix="/" title="contact" sub-title="Under construction" />
     </section>
 </template>
 <script lang="ts" setup>

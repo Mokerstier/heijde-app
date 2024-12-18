@@ -43,7 +43,6 @@
 </template>
 <script setup lang="ts">
 const data = await usePageData('about-me');
-console.log(data.value);
 
 useHead({
     title: 'About | Wouter van der Heijde',
