@@ -13,7 +13,7 @@ export default defineNuxtConfig({
         },
     ],
     runtimeConfig: {
-        GITHUB_TOKEN: process.env.NUXT_GITHUB_TOKEN,
+        GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     },
     mongoose:{
         uri: process.env.NUXT_MONGOOSE_URI,
@@ -38,7 +38,7 @@ export default defineNuxtConfig({
     pwa: {
         manifest: {
             display: 'standalone',
-            start_url: '/heijde-app/',
+            start_url: '/',
             icons: [
                 {
                     src: 'pwa-64x64.png',

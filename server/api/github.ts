@@ -33,7 +33,6 @@ export default defineEventHandler(async (event) => {
 });
 
 const transformRepoOutline = (repo: any): RepoOutline => {
-    console.log(repo)
     return {
         name: repo.name,
         description: repo.description,
