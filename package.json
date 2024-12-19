@@ -1,42 +1,42 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "format": "prettier --log-level warn --write \"{assets,components,layouts,pages,server,utils}/**/*.{ts,scss,vue}\"",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages --dotfiles -d .output/public",
-    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/w-logo.svg"
-  },
-  "dependencies": {
-    "@nuxt/image": "^1.8.1",
-    "@nuxtjs/tailwindcss": "^6.12.2",
-    "nuxt": "^3.14.1592",
-    "nuxt-mongoose": "^1.0.6",
-    "nuxt-server-utils": "^0.0.7",
-    "octokit": "^4.0.2",
-    "sass": "^1.83.0",
-    "vue": "latest",
-    "vue-router": "latest"
-  },
-  "devDependencies": {
-    "@vite-pwa/assets-generator": "^0.2.6",
-    "@vite-pwa/nuxt": "^0.10.6",
-    "@vitest/coverage-v8": "^2.1.8",
-    "gh-pages": "^6.2.0",
-    "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.9",
-    "tailwindcss": "^3.4.17",
-    "vite-svg-loader": "^5.1.0",
-    "vitest": "^2.1.8",
-    "vitest-environment-nuxt": "^1.0.1"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "4.28.1"
-  }
+    "name": "heijde-app",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "format": "prettier --log-level warn --write \"{assets,components,layouts,pages,server,utils}/**/*.{ts,scss,vue}\"",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages --dotfiles -d .output/public",
+        "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/w-logo.svg"
+    },
+    "dependencies": {
+        "@nuxt/image": "^1.8.1",
+        "@nuxtjs/tailwindcss": "^6.12.2",
+        "nuxt": "^3.14.1592",
+        "nuxt-mongoose": "^1.0.6",
+        "nuxt-server-utils": "^0.0.7",
+        "octokit": "^4.0.2",
+        "sass": "^1.83.0",
+        "vue": "latest",
+        "vue-router": "latest"
+    },
+    "devDependencies": {
+        "@vite-pwa/assets-generator": "^0.2.6",
+        "@vite-pwa/nuxt": "^0.10.6",
+        "@vitest/coverage-v8": "^2.1.8",
+        "gh-pages": "^6.2.0",
+        "prettier": "^3.4.2",
+        "prettier-plugin-tailwindcss": "^0.6.9",
+        "tailwindcss": "^3.4.17",
+        "vite-svg-loader": "^5.1.0",
+        "vitest": "^2.1.8",
+        "vitest-environment-nuxt": "^1.0.1"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "4.28.1"
+    }
 }
