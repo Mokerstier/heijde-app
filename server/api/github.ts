@@ -1,5 +1,6 @@
 import { Octokit } from 'octokit';
-import useFetchWithCache from '~/composables/useFetchWithCache';
+
+export type RepoLanguages = [{ [key: string]: string }];
 
 export type RepoOutline = {
     name: string;
@@ -7,10 +8,25 @@ export type RepoOutline = {
     language: string | null;
     updated_at: string;
     homepage: string | null;
-    languages: string[];
+    languages: RepoLanguages;
 };
 
 export default defineEventHandler(async (event) => {
+    const twelveMostRecentWithLanguages = async (repos: any): Promise<RepoOutline[]> => {
+        return repos.map(async (repo: any) => {
+            const languages = await octokit.request(
+                `GET /repos/Mokerstier/${repo.name}/languages`,
+                {
+                    owner: 'Mokerstier',
+                    repo: repo.name,
+                }
+            );
+            const transformedRepo = transformRepoOutline(repo, [languages.data]);
+
+            return transformedRepo;
+        });
+    };
+
     const { GITHUB_TOKEN } = useRuntimeConfig();
 
     const octokit = new Octokit({
@@ -29,26 +45,18 @@ export default defineEventHandler(async (event) => {
             new Date(b.updated_at as string).getTime() - new Date(a.updated_at as string).getTime()
     );
     const twelveMostRecentProjects = sortedData.slice(0, 12);
-    const repoOutlines = twelveMostRecentProjects.map((repo) => transformRepoOutline(repo));
-    return repoOutlines;
+    const repoOutlines = await twelveMostRecentWithLanguages(twelveMostRecentProjects);
+    const resolvedRepoOutlines = await Promise.all(repoOutlines);
+    return resolvedRepoOutlines;
 });
 
-const fetchLanguages = async (url: string | null) => {
-    if (url === null) return [];
-    const response = await useFetchWithCache<{ [key: string]: string }>(url);
-    return Object.keys(response.value);
-};
-
-const transformRepoOutline = async (repo: any): Promise<RepoOutline> => {
-    const languages = (await fetchLanguages(repo.languages_url)) ?? [''];
-
+const transformRepoOutline = (repo: any, languages: RepoLanguages): RepoOutline => {
     return {
         name: repo.name,
         description: repo.description,
         language: repo.language,
         updated_at: repo.updated_at,
         homepage: repo.html_url,
-        languages,
+        languages: ,
     };
 };
-

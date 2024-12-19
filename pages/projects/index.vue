@@ -12,7 +12,8 @@
                 v-for="(repo, index) in data">
                 <span>{{ repo.name }}</span>
                 <span>{{ repo.description }}</span>
-                <span v-if="languages[index]">{{ languages[index] }}</span>
+                <span>{{ repo.languages }}</span>
+                <PieChart :data="repo.languages" />
                 <Button :as-link="true" v-if="repo.homepage" variant="primary" :to="repo.homepage"
                     >Github Link</Button
                 >
@@ -22,22 +23,10 @@
 </template>
 <script lang="ts" setup>
 import type { RepoOutline } from '~/server/api/github';
+import * as d3 from 'd3';
+import PieChart from '~/components/PieChart.vue';
 
 const data = await useFetchWithCache<RepoOutline[]>('/api/github');
-const languages = ref<string[][]>([]);
-
-const fetchLanguages = async (url: string | null) => {
-    if (url === null) return;
-    const response = await useFetchWithCache<{ [key: string]: string }>(url);
-    return Object.keys(response.value);
-};
-
-onMounted(() => {
-    languages.value = [];
-    data.value?.forEach(async (repo) => {
-        languages.value.push((await fetchLanguages(repo.languages_url)) ?? ['']);
-    });
-});
 
 useHead({
     title: 'Projects | Wouter van der Heijde',
