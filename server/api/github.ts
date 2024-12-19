@@ -1,4 +1,5 @@
 import { Octokit } from 'octokit';
+import useFetchWithCache from '~/composables/useFetchWithCache';
 
 export type RepoOutline = {
     name: string;
@@ -6,7 +7,7 @@ export type RepoOutline = {
     language: string | null;
     updated_at: string;
     homepage: string | null;
-    languages_url: string | null;
+    languages: string[];
 };
 
 export default defineEventHandler(async (event) => {
@@ -29,17 +30,25 @@ export default defineEventHandler(async (event) => {
     );
     const twelveMostRecentProjects = sortedData.slice(0, 12);
     const repoOutlines = twelveMostRecentProjects.map((repo) => transformRepoOutline(repo));
-    return repoOutlines as RepoOutline[];
+    return repoOutlines;
 });
 
-const transformRepoOutline = (repo: any): RepoOutline => {
+const fetchLanguages = async (url: string | null) => {
+    if (url === null) return [];
+    const response = await useFetchWithCache<{ [key: string]: string }>(url);
+    return Object.keys(response.value);
+};
+
+const transformRepoOutline = async (repo: any): Promise<RepoOutline> => {
+    const languages = (await fetchLanguages(repo.languages_url)) ?? [''];
+
     return {
         name: repo.name,
         description: repo.description,
         language: repo.language,
         updated_at: repo.updated_at,
         homepage: repo.html_url,
-        languages_url: repo.languages_url
+        languages,
     };
 };
 
