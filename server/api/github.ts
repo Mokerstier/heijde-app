@@ -1,15 +1,6 @@
 import { Octokit } from 'octokit';
-
-export type RepoLanguages = [{ [key: string]: string }];
-
-export type RepoOutline = {
-    name: string;
-    description: string | null;
-    language: string | null;
-    updated_at: string;
-    homepage: string | null;
-    languages: RepoLanguages;
-};
+import { RepoOutline } from '~/types/Repo';
+import { transformRepoOutline } from '~/utils/transFormers';
 
 export default defineEventHandler(async (event) => {
     const twelveMostRecentWithLanguages = async (repos: any): Promise<RepoOutline[]> => {
@@ -21,7 +12,7 @@ export default defineEventHandler(async (event) => {
                     repo: repo.name,
                 }
             );
-            const transformedRepo = transformRepoOutline(repo, [languages.data]);
+            const transformedRepo = transformRepoOutline(repo, languages.data);
 
             return transformedRepo;
         });
@@ -50,13 +41,3 @@ export default defineEventHandler(async (event) => {
     return resolvedRepoOutlines;
 });
 
-const transformRepoOutline = (repo: any, languages: RepoLanguages): RepoOutline => {
-    return {
-        name: repo.name,
-        description: repo.description,
-        language: repo.language,
-        updated_at: repo.updated_at,
-        homepage: repo.html_url,
-        languages: ,
-    };
-};
