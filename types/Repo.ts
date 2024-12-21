@@ -1,4 +1,9 @@
-export type RepoLanguages = { [key: string]: string };
+export type RepoLanguages = { [key: string]: number };
+
+export type EnrichedLanguage = {
+    name: string;
+    bytes: number;
+};
 
 export type RepoOutline = {
     name: string;

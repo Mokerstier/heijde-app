@@ -30,7 +30,9 @@ export default defineEventHandler(async (event) => {
         },
     });
 
-    const filteredReposOwnedByMe = repos.data.filter((repo) => repo.owner.login === 'Mokerstier');
+    const filteredReposOwnedByMe = repos.data.filter(
+        (repo) => repo.owner.login === 'Mokerstier' && repo.language !== null
+    );
     const sortedData = filteredReposOwnedByMe.sort(
         (a, b) =>
             new Date(b.updated_at as string).getTime() - new Date(a.updated_at as string).getTime()
@@ -40,4 +42,3 @@ export default defineEventHandler(async (event) => {
     const resolvedRepoOutlines = await Promise.all(repoOutlines);
     return resolvedRepoOutlines;
 });
-
