@@ -1,5 +1,5 @@
 <template>
-    <div ref="pieChart"></div>
+    <div ref="pieChart" class="flex justify-center"></div>
 </template>
 <script lang="ts" setup>
 import * as d3 from 'd3';
@@ -64,4 +64,3 @@ onMounted(() => {
         .style('opacity', 1);
 });
 </script>
-
