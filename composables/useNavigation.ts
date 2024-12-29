@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 const routesToTransform = ['index'];
-const routesToExclude = ['login', 'index', 'blogs-post', 'blogs-slug'];
+const routesToExclude = ['login', 'index', 'blogs-post', 'blogs-slug', 'register'];
 
 export type Link = {
     label: string;
