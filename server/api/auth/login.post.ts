@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import { useCookie } from 'nuxt/app';
 
 export default defineEventHandler(async (event) => {
     const { email, password } = await readBody(event);

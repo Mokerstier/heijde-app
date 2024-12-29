@@ -5,7 +5,6 @@ interface IRequestBody {
     name: string;
 }
 export default defineEventHandler(async (event) => {
-    console.log('POST /api/users');
     const { email, password, name } = await readBody<IRequestBody>(event);
 
     const newUserData = await UserSchema.create({

@@ -15,7 +15,6 @@
                         class="flex h-full flex-col justify-center border border-gray p-4">
                         <h4 class="text-2xl">{{ repo.name }}</h4>
                         <p>{{ repo.description }}</p>
-                        <!-- <PieChart :data="repo.languages" /> -->
 
                         <Button
                             class="mx-auto mt-auto"
@@ -30,7 +29,21 @@
                 <template #back>
                     <div
                         ref="clusterRefs"
-                        class="relative h-full w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/20 from-0% to-transparent to-70%">
+                        class="relative h-full w-full border border-gray bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/20 from-0% to-transparent to-70%">
+                        <Button
+                            class="group/button absolute -right-4 top-4 flex max-w-max flex-nowrap items-center justify-start"
+                            :as-link="true"
+                            v-if="repo.homepage"
+                            variant="secondary"
+                            :to="repo.homepage"
+                            :title="`Visit ${repo.name}`">
+                            <SvgComponent
+                                class="transition-colors group-hover/button:text-primary"
+                                :width="40"
+                                :height="40"
+                                icon="Github" />
+                        </Button>
+
                         <ClientOnly fallback-tag="span" fallback="Loading language data...">
                             <ClusterChart
                                 :width="clusterWidth"
@@ -46,7 +59,6 @@
     </div>
 </template>
 <script lang="ts" setup>
-import PieChart from '~/components/charts/PieChart.vue';
 import type { RepoOutline } from '~/types/Repo';
 const clusterRefs = ref<HTMLDivElement[] | null>(null);
 const clusterWidth = ref<number>(0);

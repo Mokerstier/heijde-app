@@ -1,56 +1,26 @@
 <template>
     <section class="container">
         <HeaderBlock prefix="/" title="blogs" sub-title="Under construction" />
-        <form @submit.prevent="submitForm" class="text-black">
-            <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    v-model="form.email"
-                    required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+    </section>
+    <section class="mt container grid gap-2 lg:grid-cols-3">
+        <article v-for="blog in data" class="border border-gray p-4">
+            <a :href="`/blogs/${blog.slug}`" class="mb-4 block">
+                <HeaderBlock :title="blog.title" :sub-title="blog.description" />
+            </a>
+            <div class="flex flex-wrap gap-y-3">
+                <Pill
+                    :key="tag + blog.title"
+                    :class="{ 'border-white text-white': activeFilters.includes(tag) }"
+                    @click="updateFilter(tag)"
+                    v-for="tag in blog.tags"
+                    >{{ tag }}</Pill
+                >
             </div>
-            <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray">Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    v-model="form.name"
-                    required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-            </div>
-            <div class="mb-4">
-                <label for="password" class="block text-sm font-medium text-gray">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    v-model="form.password"
-                    required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-            </div>
-            <button
-                type="submit"
-                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                Submit
-            </button>
-        </form>
+        </article>
     </section>
 </template>
 <script lang="ts" setup>
-const form = ref({
-    email: '',
-    name: '',
-    password: '',
-});
-
-const submitForm = async () => {
-    try {
-        useFetch('/api/users/', { method: 'POST', body: form.value });
-    } catch (error) {
-        console.error('Error creating user:', error);
-    }
-};
+import type { BlogOutline } from '~/server/models/blog.model';
 
 useHead({
     title: 'Blogs | Wouter van der Heijde',
@@ -60,5 +30,29 @@ useHead({
             content: 'Read my latest blogs',
         },
     ],
+});
+
+const data = await useFetchWithCache<BlogOutline[]>('/api/blog');
+const activeFilters = ref<string[]>([]);
+
+const updateFilter = (tag: string) => {
+    if (activeFilters.value.includes(tag)) {
+        activeFilters.value = activeFilters.value.filter((filter) => filter !== tag);
+    } else {
+        activeFilters.value = [...activeFilters.value, tag];
+    }
+};
+
+const updateQuery = (query: Record<string, string>) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    for (const [key, value] of Object.entries(query)) {
+        searchParams.set(key, value);
+    }
+    window.history.pushState({}, '', `${window.location.pathname}?${searchParams}`);
+};
+
+watch(activeFilters, () => {
+    const tags = activeFilters.value.join(',');
+    updateQuery({ tags });
 });
 </script>

@@ -1,5 +1,22 @@
 import { defineMongooseModel } from '#nuxt/mongoose';
-export const Blog = defineMongooseModel(
+import { Document } from 'mongoose';
+
+export interface IBlog extends Document {
+    title: string;
+    tags: string[];
+    content: string;
+    description: string;
+    slug: string;
+}
+
+export interface BlogOutline {
+    title: string;
+    description: string;
+    tags: string[];
+    slug: string;
+}
+
+export const Blog = defineMongooseModel<IBlog>(
     'Blog',
     {
         title: {
@@ -13,7 +30,18 @@ export const Blog = defineMongooseModel(
         content: {
             type: 'string',
         },
+        description: {
+            type: 'string',
+        },
+        slug: {
+            type: 'string',
+        },
     },
-    {},
+    {
+        collection: 'blogs',
+        timestamps: true,
+        strict: true,
+        strictQuery: true,
+    },
     (schema) => {}
 );

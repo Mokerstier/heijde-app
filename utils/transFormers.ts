@@ -1,3 +1,4 @@
+import type { BlogOutline } from '~/server/models/blog.model';
 import type { EnrichedLanguage, RepoLanguages, RepoOutline } from '~/types/Repo';
 
 /**
@@ -31,3 +32,14 @@ export const transformRepoOutline = (repo: any, languages: RepoLanguages): RepoO
         languages,
     };
 };
+
+export const transformBlog = (blog: IBlog): BlogOutline => {
+    return {
+        title: blog.title,
+        description: blog.description,
+        tags: blog.tags,
+        slug: blog.slug,
+    };
+};
+
+export const transformSlug = (title: string) => title.toLowerCase().replace(/\s/g, '-');
