@@ -15,16 +15,22 @@ export default defineNuxtConfig({
     runtimeConfig: {
         GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     },
-    mongoose:{
+    mongoose: {
         uri: process.env.NUXT_MONGOOSE_URI,
-        options: { 
-        },
+        options: {},
         devtools: true,
     },
     ssr: true,
     css: ['@/assets/scss/main.scss'],
     devtools: { enabled: true },
-    modules: ['nuxt-mongoose', '@nuxtjs/tailwindcss', '@nuxt/image', '@vite-pwa/nuxt'],
+    modules: [
+        '@pinia/nuxt',
+        '@nuxtjs/tailwindcss',
+        '@nuxt/image',
+        '@vite-pwa/nuxt',
+        'nuxt-mongoose',
+        'nuxt-auth-utils',
+    ],
     vite: {
         css: {
             preprocessorOptions: {

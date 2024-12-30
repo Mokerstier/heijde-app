@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 const routesToTransform = ['index'];
-const routesToExclude = ['login', 'index'];
+const routesToExclude = ['login', 'index', 'blogs-post', 'blogs-slug', 'register'];
 
 export type Link = {
     label: string;
@@ -39,4 +39,3 @@ const transformRoute = (route: RouteRecordRaw) => {
         return { label: route.name, to: route.path };
     }
 };
-

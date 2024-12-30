@@ -1,15 +1,23 @@
 import { Octokit } from 'octokit';
-
-export type RepoOutline = {
-    name: string;
-    description: string | null;
-    language: string | null;
-    updated_at: string;
-    homepage: string | null;
-    languages_url: string | null;
-};
+import { RepoOutline } from '~/types/Repo';
+import { transformRepoOutline } from '~/utils/transFormers';
 
 export default defineEventHandler(async (event) => {
+    const twelveMostRecentWithLanguages = async (repos: any): Promise<RepoOutline[]> => {
+        return repos.map(async (repo: any) => {
+            const languages = await octokit.request(
+                `GET /repos/Mokerstier/${repo.name}/languages`,
+                {
+                    owner: 'Mokerstier',
+                    repo: repo.name,
+                }
+            );
+            const transformedRepo = transformRepoOutline(repo, languages.data);
+
+            return transformedRepo;
+        });
+    };
+
     const { GITHUB_TOKEN } = useRuntimeConfig();
 
     const octokit = new Octokit({
@@ -22,24 +30,15 @@ export default defineEventHandler(async (event) => {
         },
     });
 
-    const filteredReposOwnedByMe = repos.data.filter((repo) => repo.owner.login === 'Mokerstier');
+    const filteredReposOwnedByMe = repos.data.filter(
+        (repo) => repo.owner.login === 'Mokerstier' && repo.language !== null
+    );
     const sortedData = filteredReposOwnedByMe.sort(
         (a, b) =>
             new Date(b.updated_at as string).getTime() - new Date(a.updated_at as string).getTime()
     );
     const twelveMostRecentProjects = sortedData.slice(0, 12);
-    const repoOutlines = twelveMostRecentProjects.map((repo) => transformRepoOutline(repo));
-    return repoOutlines as RepoOutline[];
+    const repoOutlines = await twelveMostRecentWithLanguages(twelveMostRecentProjects);
+    const resolvedRepoOutlines = await Promise.all(repoOutlines);
+    return resolvedRepoOutlines;
 });
-
-const transformRepoOutline = (repo: any): RepoOutline => {
-    return {
-        name: repo.name,
-        description: repo.description,
-        language: repo.language,
-        updated_at: repo.updated_at,
-        homepage: repo.html_url,
-        languages_url: repo.languages_url
-    };
-};
-
