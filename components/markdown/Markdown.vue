@@ -10,6 +10,8 @@ defineProps<{
 </script>
 <style lang="scss">
 .markdown {
+    @apply mx-auto max-w-2xl;
+
     h1 {
         font-size: 2em;
         margin-top: 0;

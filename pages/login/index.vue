@@ -47,6 +47,6 @@ const handleLogin = async () => {
 </script>
 <style scoped lang="scss">
 .input-field {
-    @apply p-2;
+    @apply p-2 focus:outline-primary;
 }
 </style>

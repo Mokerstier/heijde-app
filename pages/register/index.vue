@@ -9,7 +9,7 @@
                     id="email"
                     v-model="form.email"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:outline-primary sm:text-sm" />
             </div>
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray">Name</label>
@@ -18,7 +18,7 @@
                     id="name"
                     v-model="form.name"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:outline-primary sm:text-sm" />
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray">Password</label>
@@ -27,11 +27,11 @@
                     id="password"
                     v-model="form.password"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:outline-primary sm:text-sm" />
             </div>
             <button
                 type="submit"
-                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2">
                 Submit
             </button>
         </form>
