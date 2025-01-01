@@ -24,6 +24,7 @@
         "marked": "^15.0.4",
         "nuxt": "^3.14.1592",
         "nuxt-auth-utils": "^0.5.7",
+        "nuxt-mail": "^5.1.1",
         "nuxt-mongoose": "^1.0.6",
         "nuxt-server-utils": "^0.0.7",
         "octokit": "^4.0.2",

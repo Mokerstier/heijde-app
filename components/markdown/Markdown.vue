@@ -46,7 +46,7 @@ defineProps<{
     }
 
     pre {
-        @apply mb-4 overflow-auto bg-zinc-950;
+        @apply mb-4 overflow-auto bg-zinc-950 p-2;
     }
     code {
         @apply inline max-w-full bg-zinc-950 text-primary;
