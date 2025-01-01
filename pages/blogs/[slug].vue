@@ -1,5 +1,5 @@
 <template>
-    <section class="container">
+    <section class="container max-w-3xl">
         <div class="mb-6">
             <Pill :key="tag" v-for="tag in blog.tags">{{ tag }}</Pill>
         </div>

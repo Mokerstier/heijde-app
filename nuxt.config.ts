@@ -14,6 +14,19 @@ export default defineNuxtConfig({
     ],
     runtimeConfig: {
         GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+        mail: {
+            message: {
+                to: process.env.MAIL_PERSONAL,
+            },
+            smtp: {
+                host: 'smtp.gmail.com',
+                port: 587,
+                auth: {
+                    user: process.env.GMAIL_MAIL,
+                    pass: process.env.GMAIL_PASSWORD,
+                },
+            },
+        },
     },
     mongoose: {
         uri: process.env.NUXT_MONGOOSE_URI,
@@ -31,6 +44,7 @@ export default defineNuxtConfig({
         'nuxt-mongoose',
         'nuxt-auth-utils',
         'nuxt-vercel-analytics',
+        'nuxt-mail',
     ],
     vite: {
         css: {
