@@ -30,6 +30,7 @@ export default defineNuxtConfig({
         '@vite-pwa/nuxt',
         'nuxt-mongoose',
         'nuxt-auth-utils',
+        'nuxt-vercel-analytics',
     ],
     vite: {
         css: {
