@@ -56,8 +56,9 @@
 </template>
 <script lang="ts" setup>
 definePageMeta({
-    middleware: 'auth', // this should match the name of the file inside the middleware directory
+    middleware: 'auth',
 });
+
 const tagCount = ref(1);
 const loading = ref(false);
 const succes = ref(false);

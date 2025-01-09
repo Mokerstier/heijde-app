@@ -3,20 +3,11 @@
         <HeaderBlock prefix="/" title="blogs" sub-title="Under construction" />
     </section>
     <section class="mt container grid gap-2 lg:grid-cols-3">
-        <article v-for="blog in data" class="border border-gray p-4">
-            <a :href="`/blogs/${blog.slug}`" class="mb-4 block">
-                <HeaderBlock :title="blog.title" :sub-title="blog.description" />
-            </a>
-            <div class="flex flex-wrap gap-y-3">
-                <Pill
-                    :key="tag + blog.title"
-                    :class="{ 'border-white text-white': activeFilters.includes(tag) }"
-                    @click="updateFilter(tag)"
-                    v-for="tag in blog.tags"
-                    >{{ tag }}</Pill
-                >
-            </div>
-        </article>
+        <BlogCard
+            v-for="blog in data"
+            :blog="blog"
+            @update-filter="updateFilter"
+            :activeFilters="activeFilters" />
     </section>
 </template>
 <script lang="ts" setup>
