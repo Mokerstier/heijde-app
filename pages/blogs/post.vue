@@ -12,7 +12,7 @@
                     id="title"
                     v-model="body.title"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    class="border-gray-300 mt-1 block w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
             </div>
             <div class="mb-4">
                 <label for="content" class="block text-sm font-medium text-gray">Content</label>
@@ -20,7 +20,7 @@
                     id="content"
                     v-model="body.content"
                     required
-                    class="border-gray-300 mt-1 block min-h-40 w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    class="border-gray-300 mt-1 block min-h-40 w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
             </div>
             <div class="mb-4">
                 <label for="description" class="block text-sm font-medium text-gray"
@@ -30,7 +30,7 @@
                     id="description"
                     v-model="body.description"
                     required
-                    class="border-gray-300 mt-1 block min-h-10 w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    class="border-gray-300 mt-1 block min-h-10 w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
             </div>
             <div class="mb-4">
                 <label for="tags" class="block text-sm font-medium text-gray">Tags</label>
@@ -39,7 +39,7 @@
                     type="text"
                     id="tags"
                     v-model="body.tags[index - 1]"
-                    class="border-gray-300 mt-1 block w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    class="border-gray-300 mt-1 block w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
                 <Button class="mt-4" variant="primary" @click="tagCount = tagCount + 1">
                     Add another tag
                 </Button>
@@ -56,8 +56,9 @@
 </template>
 <script lang="ts" setup>
 definePageMeta({
-    middleware: 'auth', // this should match the name of the file inside the middleware directory
+    middleware: 'auth',
 });
+
 const tagCount = ref(1);
 const loading = ref(false);
 const succes = ref(false);
