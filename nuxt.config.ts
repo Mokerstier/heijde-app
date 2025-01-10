@@ -13,6 +13,9 @@ export default defineNuxtConfig({
         },
     ],
     runtimeConfig: {
+        public: {
+            CAPTCHA_KEY: process.env.CAPTCHA_KEY,
+        },
         GITHUB_TOKEN: process.env.GITHUB_TOKEN,
         mail: {
             message: {

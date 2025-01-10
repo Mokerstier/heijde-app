@@ -79,6 +79,8 @@
 </template>
 
 <script lang="ts" setup>
+import { useReCaptcha } from 'vue-recaptcha-v3';
+
 useHead({
     title: 'Contact | Wouter van der Heijde',
     meta: [
@@ -88,7 +90,8 @@ useHead({
         },
     ],
 });
-const mail = useMail();
+
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
 
 const body = ref({
     name: '',
@@ -96,12 +99,59 @@ const body = ref({
     message: '',
 });
 
-const handleSubmit = (event: Event) => {
+const errorMessage = ref<string | null>();
+const submissionMessage = ref<string | null>();
+
+const recaptcha = async () => {
+    await recaptchaLoaded(); // Wait for reCAPTCHA to load
+    return await executeRecaptcha('contact'); // Create a reCAPTCHA token
+};
+
+const mail = useMail();
+const handleSubmit = async (event: Event) => {
     alert('Message sent!');
-    mail.send({
-        from: body.value.name,
-        subject: `Received an email from ${body.value.email}`,
-        text: body.value.message,
-    });
+
+    const token = await recaptcha(); // Call the recaptcha method to get the token
+
+    // Check if the token is valid
+    if (!token) {
+        errorMessage.value = 'Invalid reCAPTCHA. Please try again.';
+        submissionMessage.value = null; // Clear previous messages
+        alert(errorMessage.value);
+        return; // Exit if the token is invalid
+    }
+
+    try {
+        console.log(token);
+        // Send the token to the CAPTCHA validation API first
+        const captchaResponse = await fetch(`/api/captcha`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ recaptcha_token: token }),
+        });
+        const captcha = await captchaResponse.json();
+
+        // If the CAPTCHA validation is successful (status 200), submit the form
+        if (captcha.succes) {
+            // Prepare form data for submission
+            mail.send({
+                from: body.value.name,
+                subject: `Received an email from ${body.value.email}`,
+                text: body.value.message,
+            });
+        } else {
+            // Handle CAPTCHA validation error
+            errorMessage.value = 'CAPTCHA validation failed. Please try again.';
+            alert(errorMessage.value);
+            submissionMessage.value = null;
+        }
+    } catch (error) {
+        console.error('Submission error:', error);
+        errorMessage.value = 'An error occurred while submitting the form.';
+        submissionMessage.value = null; // Clear previous messages
+        alert(errorMessage.value); // Show error alert
+    }
 };
 </script>
