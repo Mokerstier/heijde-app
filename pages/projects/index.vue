@@ -13,6 +13,11 @@
                         :key="repo.name"
                         ref="repoCard"
                         class="flex h-full flex-col justify-center border border-gray p-4">
+                        <NuxtImg
+                            v-if="repo.image"
+                            :src="repo.image"
+                            :alt="repo.name"
+                            class="mx-auto mb-4 max-h-48 lg:max-h-none" />
                         <h4 class="text-2xl">{{ repo.name }}</h4>
                         <p>{{ repo.description }}</p>
 
@@ -98,3 +103,4 @@ useHead({
     ],
 });
 </script>
+

@@ -57,8 +57,26 @@ export default defineNuxtConfig({
                 },
             },
         },
-        plugins: [svgLoader()],
+        plugins: [
+            svgLoader({
+                svgoConfig: {
+                    plugins: [
+                        {
+                            name: 'preset-default',
+                            params: {
+                                overrides: {
+                                    cleanupIds: { remove: false },
+                                    removeViewBox: false,
+                                    removeUselessDefs: false,
+                                },
+                            },
+                        },
+                    ],
+                },
+            }),
+        ],
     },
+
     pwa: {
         manifest: {
             theme_color: '#282c33',
@@ -90,3 +108,4 @@ export default defineNuxtConfig({
         },
     },
 });
+

@@ -3,7 +3,7 @@
 Welcome to the Heijde App, a personal portfolio project built with Vue, TypeScript, SCSS, and JavaScript.
 
 This github pages website moved to vercel!
-<a href="https://heijde-app.vercel.app/" style="border: solid 1px #54D389; padding: 8px; color: #fff; background-color: #282c33">Lets have a look</a>
+<a href="https://heijde-app.vercel.app/" style="border: solid 1px #3488dc; padding: 8px; color: #fff; background-color: #282c33">Lets have a look</a>
 
 ## Table of Contents
 
@@ -75,3 +75,4 @@ Dynamic Content: Built with Vue and TypeScript for a seamless user experience.
 Distributed under the MIT License. See LICENSE for more information.
 
 Thank you for visiting my portfolio! If you have any questions or feedback, feel free to reach out.
+

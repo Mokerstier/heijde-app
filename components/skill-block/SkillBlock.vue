@@ -5,7 +5,7 @@
             :show-border="Header.showBorder"
             :sub-title="Header.subTitle"></HeaderBlock>
         <div class="relative mt-3 grid gap-14 lg:grid-cols-2">
-            <div class="absolute bottom-0 left-0 -z-10 h-full w-full lg:static">
+            <div class="absolute bottom-0 left-0 -z-10 h-full w-full text-primary lg:static">
                 <SvgComponent :class="Visual.class" :icon="Visual.icon" />
             </div>
             <div class="grid items-center gap-4 md:grid-cols-2">
@@ -37,3 +37,4 @@ const [Header, Visual, SkillCards]: [
     ChildrenProps['SkillCards'],
 ] = props.children;
 </script>
+

@@ -37,7 +37,7 @@
                 <input
                     v-for="index in tagCount"
                     type="text"
-                    id="tags"
+                    id="tags-{{ index }}"
                     v-model="body.tags[index - 1]"
                     class="border-gray-300 mt-1 block w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
                 <Button class="mt-4" variant="primary" @click="tagCount = tagCount + 1">
@@ -67,12 +67,13 @@ const body = ref({
     title: '',
     content: '',
     description: '',
-    tags: [],
+    tags: [''],
 });
 
 const handleBlogPost = async () => {
     loading.value = true;
     try {
+        body.value.tags = body.value.tags.map((tag) => tag.toLowerCase());
         const { data } = await useFetch('/api/blog', { method: 'POST', body: body.value });
         if (data.value) {
             succes.value = true;
@@ -88,3 +89,4 @@ const reloadPage = () => {
     window.location.reload();
 };
 </script>
+

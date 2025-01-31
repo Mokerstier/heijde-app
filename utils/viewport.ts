@@ -1,4 +1,4 @@
-type ViewportSize = 's' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export type ViewportSize = 's' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export const getViewportSize = (): ViewportSize => {
     const width = window.innerWidth;
@@ -19,3 +19,4 @@ export const getViewportSize = (): ViewportSize => {
 };
 
 export default getViewportSize;
+

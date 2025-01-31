@@ -39,3 +39,4 @@ const transformRoute = (route: RouteRecordRaw) => {
         return { label: route.name, to: route.path };
     }
 };
+

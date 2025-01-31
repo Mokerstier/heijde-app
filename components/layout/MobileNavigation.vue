@@ -6,7 +6,7 @@
                     <Button
                         :as-link="true"
                         variant="secondary"
-                        active-class="text-white"
+                        active-class="active"
                         class="underline-animation text-3xl text-gray"
                         :to="route.to">
                         <span> <span class="text-primary">#</span>{{ route.label }} </span>
@@ -43,7 +43,7 @@ const props = defineProps<{
 </script>
 <style scoped lang="scss">
 .menu {
-    @apply absolute left-0 right-0 top-[calc(100%+1px)] z-10 flex h-[calc(100vh-var(--nav-height))] min-h-full w-full flex-col bg-slate px-4 pb-8 pt-12;
+    @apply absolute left-0 right-0 top-[calc(100%+1px)] z-50 flex h-[calc(100vh-var(--nav-height))] min-h-full w-full flex-col bg-slate px-4 pb-8 pt-12;
 }
 
 .menu-enter-active,
