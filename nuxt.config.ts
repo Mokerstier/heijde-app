@@ -12,10 +12,8 @@ export default defineNuxtConfig({
             pathPrefix: false,
         },
     ],
+    turnstile: { siteKey: process.env.CAPTCHA_KEY },
     runtimeConfig: {
-        public: {
-            CAPTCHA_KEY: process.env.CAPTCHA_KEY,
-        },
         GITHUB_TOKEN: process.env.GITHUB_TOKEN,
         mail: {
             message: {
@@ -28,6 +26,11 @@ export default defineNuxtConfig({
                     user: process.env.GMAIL_MAIL,
                     pass: process.env.GMAIL_PASSWORD,
                 },
+            },
+        },
+        public: {
+            turnstile: {
+                secretKey: process.env.CLOUDFLARE_SECRET,
             },
         },
     },
@@ -48,6 +51,7 @@ export default defineNuxtConfig({
         'nuxt-auth-utils',
         'nuxt-vercel-analytics',
         'nuxt-mail',
+        '@nuxtjs/turnstile',
     ],
     vite: {
         css: {
