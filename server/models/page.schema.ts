@@ -1,6 +1,5 @@
 import { defineMongooseModel } from '#nuxt/mongoose';
 import { Schema } from 'mongoose';
-import { Header } from '~/components/header/HeaderBlock.vue';
 import { Icon } from '~/components/SvgComponent.vue';
 
 export const PageSchema = defineMongooseModel<RootPage>(
@@ -17,16 +16,26 @@ export const PageSchema = defineMongooseModel<RootPage>(
 
 export interface RootPage {
     alias: string;
-    template: (Header | SkillBlock | ContentSection)[];
+    template: [PageElement];
 }
 
-export interface Components {
-    Header?: Header;
-    SkillBlock?: SkillBlock;
-    ContentSection?: ContentSection;
+export type PageElement = ContentHeader | SkillBlock | ContentSection;
+
+export interface ContentHeader {
+    alias?: string;
+    title?: string;
+    prefix?: string;
+    link?: {
+        url: string;
+        label: string;
+    };
+    showBorder?: boolean;
+    subTitle?: string;
+    trim?: boolean;
 }
+
 export interface ChildrenProps {
-    Header: Header;
+    Header: ContentHeader;
     Visual: Visual;
     SkillCards: {
         Cards: Card[];

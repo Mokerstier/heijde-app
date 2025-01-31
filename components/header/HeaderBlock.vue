@@ -27,20 +27,10 @@
     >
 </template>
 <script lang="ts" setup>
-export type Header = {
-    alias?: string;
-    title: string;
-    prefix?: string;
-    link?: {
-        url: string;
-        label: string;
-    };
-    showBorder?: boolean;
-    subTitle?: string;
-    trim?: boolean;
-};
+import type { ContentHeader } from '~/server/models/page.schema';
+import { animateHeader } from '~/utils/headerAnimation';
 
-defineProps<Header>();
+defineProps<ContentHeader>();
 
 const headerBlock = ref<HTMLElement | null>(null);
 const isInView = ref(false);
@@ -96,4 +86,3 @@ onMounted(() => {
     }
 }
 </style>
-

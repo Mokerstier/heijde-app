@@ -105,10 +105,7 @@ const submissionMessage = ref<string | null>();
 
 const mail = useMail();
 const handleSubmit = async (event: Event) => {
-    alert('Message sent!');
-
     try {
-        console.log(body.value.token);
         // Send the token to the CAPTCHA validation API first
         const captchaResponse = await fetch(`/api/turnstile`, {
             method: 'POST',
