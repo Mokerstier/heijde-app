@@ -40,11 +40,13 @@
                             class="border-gray-300 rounded-md border p-2 focus:outline-primary"
                             required></textarea>
                     </div>
-                    <button
+                    <NuxtTurnstile v-model="body.token" appearance="interaction-only" />
+                    <Button
+                        variant="primary"
                         type="submit"
                         class="hover:bg-primary-dark self-start rounded-md bg-primary px-4 py-2 text-white">
                         Send Message
-                    </button>
+                    </Button>
                 </form>
             </div>
             <div class="relative flex items-center justify-center">
@@ -79,8 +81,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useReCaptcha } from 'vue-recaptcha-v3';
-
 useHead({
     title: 'Contact | Wouter van der Heijde',
     meta: [
@@ -91,50 +91,33 @@ useHead({
     ],
 });
 
-const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
+const config = useRuntimeConfig();
 
 const body = ref({
     name: '',
     email: '',
     message: '',
+    token: config.public.turnstile.secretKey as string,
 });
 
 const errorMessage = ref<string | null>();
 const submissionMessage = ref<string | null>();
 
-const recaptcha = async () => {
-    await recaptchaLoaded(); // Wait for reCAPTCHA to load
-    return await executeRecaptcha('contact'); // Create a reCAPTCHA token
-};
-
 const mail = useMail();
 const handleSubmit = async (event: Event) => {
-    alert('Message sent!');
-
-    const token = await recaptcha(); // Call the recaptcha method to get the token
-
-    // Check if the token is valid
-    if (!token) {
-        errorMessage.value = 'Invalid reCAPTCHA. Please try again.';
-        submissionMessage.value = null; // Clear previous messages
-        alert(errorMessage.value);
-        return; // Exit if the token is invalid
-    }
-
     try {
-        console.log(token);
         // Send the token to the CAPTCHA validation API first
-        const captchaResponse = await fetch(`/api/captcha`, {
+        const captchaResponse = await fetch(`/api/turnstile`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ recaptcha_token: token }),
+            body: JSON.stringify(body.value.token),
         });
         const captcha = await captchaResponse.json();
 
         // If the CAPTCHA validation is successful (status 200), submit the form
-        if (captcha.succes) {
+        if (captcha.success) {
             // Prepare form data for submission
             mail.send({
                 from: body.value.name,

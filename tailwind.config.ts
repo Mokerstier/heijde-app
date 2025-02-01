@@ -14,9 +14,10 @@ export default {
         },
         extend: {
             colors: {
-                primary: '#54D389',
-                gray: '#ABB2BF',
-                slate: '#282C33',
+                'primary': '#3488dc',
+                'primary-200': '#187adc',
+                'gray': '#ABB2BF',
+                'slate': '#282C33',
             },
             fontFamily: {
                 'nico-moji': ['Nico-Moji', ...defaultTheme.fontFamily.serif],

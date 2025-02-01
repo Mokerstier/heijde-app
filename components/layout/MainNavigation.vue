@@ -13,14 +13,23 @@
                         <NuxtImg class="h-4 w-4" src="W-logo-light.svg" /> Wouter
                     </NuxtLink>
                 </li>
-                <li v-for="route in routes" class="hidden md:block [&:nth-child(2)]:ml-auto">
+                <li
+                    v-for="link in routes"
+                    :key="link.label"
+                    ref="items"
+                    class="group relative hidden md:block [&:nth-child(2)]:ml-auto">
                     <Button
                         :as-link="true"
-                        variant="secondary"
-                        active-class="text-white"
-                        class="underline-animation text-gray"
-                        :to="route.to">
-                        <span> <span class="text-primary">#</span>{{ route.label }} </span>
+                        variant="navigation"
+                        active-class="active"
+                        class="group text-gray"
+                        :class="isNestedActive(link.to)"
+                        :to="link.to">
+                        <span>
+                            <span class="group-hover:text-primary group-[.active]:text-primary"
+                                >#</span
+                            >{{ link.label }}
+                        </span>
                     </Button>
                 </li>
                 <li class="ml-auto block md:hidden">
@@ -42,6 +51,10 @@
                     </button>
                 </li>
             </ul>
+            <SvgComponent
+                id="lightning-root"
+                icon="Electric-line"
+                class="pointer-events-none absolute left-1/2 top-0 w-full -translate-x-1/2 -translate-y-1/2 opacity-0" />
             <MobileNavigation :menu-is-open="menuIsOpen" />
         </nav>
     </div>
@@ -49,13 +62,23 @@
 
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
+
 const route = useRoute();
+const routes = useNavigation();
 
 const menuIsOpen = ref(false);
 const mainNav = ref<HTMLElement | null>(null);
-const routes = useNavigation();
+
+const navigationLinksRef = useTemplateRef('items');
+
 const toggleMenu = () => {
     menuIsOpen.value = !menuIsOpen.value;
+};
+
+const isNestedActive = (to: string) => {
+    const root = to.split('/')[1];
+    const current = route.fullPath.split('/')[1];
+    return root === current ? 'active' : '';
 };
 
 watch(
@@ -82,11 +105,24 @@ onMounted(() => {
         '--nav-height',
         `${mainNav.value?.getBoundingClientRect().height ?? 48 + 1}px`
     );
+
     window.addEventListener('resize', () => {
         document.documentElement.style.setProperty(
             '--nav-height',
             `${mainNav.value?.getBoundingClientRect().height ?? 48 + 1}px`
         );
     });
+
+    animateNavigation(navigationLinksRef.value);
 });
 </script>
+<style lang="scss">
+.spark {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.8;
+    border-radius: 100%;
+}
+</style>

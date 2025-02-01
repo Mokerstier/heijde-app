@@ -4,8 +4,9 @@ export default defineEventHandler(async (event) => {
     try {
         const blogs = await Blog.find();
         const blogsOutline = blogs.map((blog) => transformBlog(blog));
+        const filters = [...new Set(blogsOutline.flatMap((blog) => blog.tags).sort())];
 
-        return blogsOutline;
+        return { blogsOutline, filters };
     } catch (error) {
         throw createError({
             statusCode: 400,
@@ -14,3 +15,4 @@ export default defineEventHandler(async (event) => {
         });
     }
 });
+

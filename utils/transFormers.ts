@@ -1,5 +1,5 @@
 import type { BlogOutline } from '~/server/models/blog.model';
-import type { EnrichedLanguage, RepoLanguages, RepoOutline } from '~/types/Repo';
+import type { EnrichedLanguage, FileDetails, RepoLanguages, RepoOutline } from '~/types/Repo';
 
 /**
  * Transforms an object of type { [key: string]: string } to an array of objects of the same type.
@@ -20,7 +20,11 @@ export const enrichLanguagesObject = (languages: RepoLanguages): EnrichedLanguag
     });
 };
 
-export const transformRepoOutline = (repo: any, languages: RepoLanguages): RepoOutline => {
+export const transformRepoOutline = (
+    repo: any,
+    languages: RepoLanguages,
+    image?: FileDetails
+): RepoOutline => {
     // const enrichedLanguages = enrichLanguagesObject(languages);
 
     return {
@@ -30,6 +34,7 @@ export const transformRepoOutline = (repo: any, languages: RepoLanguages): RepoO
         updated_at: repo.updated_at,
         homepage: repo.html_url,
         languages,
+        image: image?.download_url,
     };
 };
 

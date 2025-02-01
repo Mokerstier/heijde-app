@@ -12,6 +12,16 @@ const icons = [
     'w-logo-outline',
     'visual',
     'quote',
+    'lightning',
+    'lightning-mirror',
+    'lightning-stroke',
+    'lightning-stroke-2',
+    'lightning-stroke-3',
+    'lightning-stroke-4',
+    'Electric-all',
+    'Electric-line',
+    'Electric-line-stretch',
+    'Electric-line-stretch-blue',
 ] as const;
 
 export type Icon = (typeof icons)[number];

@@ -5,6 +5,7 @@ import { transformRepoOutline } from '~/utils/transFormers';
 export default defineEventHandler(async (event) => {
     const twelveMostRecentWithLanguages = async (repos: any): Promise<RepoOutline[]> => {
         return repos.map(async (repo: any) => {
+            let image = null;
             const languages = await octokit.request(
                 `GET /repos/Mokerstier/${repo.name}/languages`,
                 {
@@ -12,7 +13,19 @@ export default defineEventHandler(async (event) => {
                     repo: repo.name,
                 }
             );
-            const transformedRepo = transformRepoOutline(repo, languages.data);
+            try {
+                image = await octokit.request(
+                    `GET /repos/Mokerstier/${repo.name}/contents/Banner-image.png`,
+                    {
+                        owner: 'Mokerstier',
+                        repo: repo.name,
+                    }
+                );
+            } catch (error) {
+                console.log(error);
+                image = null;
+            }
+            const transformedRepo = transformRepoOutline(repo, languages.data, image?.data);
 
             return transformedRepo;
         });
@@ -42,3 +55,4 @@ export default defineEventHandler(async (event) => {
     const resolvedRepoOutlines = await Promise.all(repoOutlines);
     return resolvedRepoOutlines;
 });
+

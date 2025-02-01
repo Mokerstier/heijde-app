@@ -45,7 +45,7 @@
             </div>
             <div class="absolute -z-10 w-full md:relative">
                 <SvgComponent
-                    class="absolute -bottom-[15rem] right-10 h-28 w-28 md:left-1/4 md:top-24 lg:right-28"
+                    class="absolute -bottom-[15rem] right-10 h-36 w-36 text-primary md:left-1/3 md:top-16 lg:right-28"
                     icon="w-logo-outline" />
                 <SvgComponent
                     class="md:left-18 absolute right-14 h-16 md:right-[unset] md:top-6"
@@ -59,3 +59,4 @@
     @apply border border-gray bg-slate px-3 py-2;
 }
 </style>
+

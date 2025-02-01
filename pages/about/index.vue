@@ -1,7 +1,10 @@
 <template>
     <div>
         <section class="container">
-            <HeaderBlock prefix="/" title="about me" sub-title="who am I?"></HeaderBlock>
+            <HeaderBlock
+                :prefix="header?.prefix"
+                :title="header?.title"
+                :sub-title="header?.subTitle"></HeaderBlock>
         </section>
         <section class="container grid gap-4 text-gray lg:grid-cols-2">
             <div class="flex flex-col gap-4">
@@ -43,7 +46,13 @@
     </div>
 </template>
 <script setup lang="ts">
+import type { ContentHeader, ContentSection } from '~/server/models/page.schema';
+import { getElementByType } from '~/utils/getElementByType';
+
 const data = await usePageData('about-me');
+
+const header = ref<ContentHeader | undefined>();
+const contentSection = ref<ContentSection | undefined>();
 
 useHead({
     title: 'About | Wouter van der Heijde',
@@ -54,5 +63,10 @@ useHead({
                 'I’m Wouter, a passionate Front-End Developer with a love for crafting sleek, user-friendly websites and applications.',
         },
     ],
+});
+
+onMounted(() => {
+    header.value = getElementByType(data.value.template);
+    contentSection.value = getElementByType(data.value.template);
 });
 </script>

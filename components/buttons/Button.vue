@@ -41,7 +41,7 @@
 <script lang="ts" setup>
 import type { Icon } from '@/components/SvgComponent.vue';
 
-type ButtonVariant = 'primary' | 'secondary';
+type ButtonVariant = 'primary' | 'secondary' | 'navigation';
 type ButtonSize = 'large' | 'small';
 
 type IconPosition = 'left' | 'right';
@@ -69,10 +69,10 @@ const htmlTag = computed(() => (asLink ? resolveComponent('NuxtLink') : 'button'
 .btn {
     &--primary {
         @apply relative z-0 overflow-hidden bg-slate px-4 py-2 font-medium text-white outline outline-1 outline-primary transition-all hover:outline-none active:scale-95;
-        filter: drop-shadow(0 0 0.75rem #54d38946);
+        filter: drop-shadow(0 0 0.75rem #3488dc46);
 
         &:hover {
-            filter: drop-shadow(0 0 0.75rem #54d389be);
+            filter: drop-shadow(0 0 0.75rem #3488dcbe);
         }
 
         &:hover::before {
@@ -86,7 +86,7 @@ const htmlTag = computed(() => (asLink ? resolveComponent('NuxtLink') : 'button'
             background-repeat: no-repeat;
             border-radius: 50%;
             background-position: 0 0;
-            background-image: conic-gradient(transparent, rgba(#54d389, 1), transparent 30%);
+            background-image: conic-gradient(transparent, rgba(#3488dc, 1), transparent 30%);
             animation: rotate 4s linear infinite;
         }
 
@@ -103,7 +103,11 @@ const htmlTag = computed(() => (asLink ? resolveComponent('NuxtLink') : 'button'
     }
 
     &--secondary {
-        @apply relative;
+        @apply relative transition-colors;
+
+        &:hover {
+            @apply text-white;
+        }
 
         &::after {
             @apply absolute -bottom-1 left-0 h-0.5 w-full bg-primary;
@@ -115,6 +119,22 @@ const htmlTag = computed(() => (asLink ? resolveComponent('NuxtLink') : 'button'
 
         &:hover::after {
             transform: scaleX(1);
+        }
+    }
+
+    &.active {
+        @apply text-white;
+
+        &::after {
+            transform: scaleX(1);
+        }
+    }
+
+    &--navigation {
+        @apply transition-colors;
+
+        &:hover {
+            @apply text-white;
         }
     }
 }
