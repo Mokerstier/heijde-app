@@ -1,7 +1,10 @@
 import gsap from 'gsap';
 import { Flip } from 'gsap/Flip';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-gsap.registerPlugin(Flip, MotionPathPlugin);
+
+if (window !== undefined) {
+    gsap.registerPlugin(Flip, MotionPathPlugin);
+}
 
 export const animateNavigation = (navigationLinksRef: HTMLLIElement[] | null) => {
     const svgNS = 'http://www.w3.org/2000/svg';
