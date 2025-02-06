@@ -12,7 +12,7 @@ export default defineNuxtConfig({
             pathPrefix: false,
         },
     ],
-    turnstile: { siteKey: process.env.CAPTCHA_KEY },
+    turnstile: { siteKey: process.env.CLOUDFLARE_KEY },
     runtimeConfig: {
         GITHUB_TOKEN: process.env.GITHUB_TOKEN,
         mail: {
@@ -112,4 +112,3 @@ export default defineNuxtConfig({
         },
     },
 });
-
