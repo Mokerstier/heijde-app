@@ -10,5 +10,5 @@ export default defineEventHandler(async (event) => {
         });
     }
 
-    return await verifyTurnstileToken(body);
+    return await verifyTurnstileToken(body.token);
 });
