@@ -3,10 +3,12 @@
         <div class="flex flex-col items-start justify-center">
             <h1 class="mb-6 font-nico-moji text-4xl lg:mb-12 lg:whitespace-nowrap">
                 <span>Wouter is a<span v-show="currentWordStartsWithVowel">n</span></span>
-                <span ref="typewriter" class="blink-cursor min-h-10 text-primary lg:inline">
+                <span
+                    ref="typewriter"
+                    class="blink-cursor block min-h-10 max-w-max text-primary lg:inline">
                     {{ currentWord }}
                 </span>
-                <span class="block text-primary"> front-end developer </span>
+                <span class="block text-primary"> full-stack developer </span>
             </h1>
             <p class="mb-6 text-gray">
                 He builds accesible user experiences, that adds value to your business

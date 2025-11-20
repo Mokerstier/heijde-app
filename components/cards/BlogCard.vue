@@ -5,11 +5,11 @@
                 activeFilters.length === 0 ||
                 blog.tags.some((tag) => activeFilters.includes(tag.toLowerCase()))
             "
-            class="relative flex min-h-[382px] flex-col gap-4 border border-gray bg-slate p-4 transition-all hover:border-white">
+            class="relative flex min-h-[250px] flex-col gap-4 border border-gray bg-slate p-4 transition-all hover:border-white">
             <div
                 ref="tagContainer"
-                class="absolute left-0 top-0 z-10 flex max-h-32 w-full flex-wrap gap-y-2 overflow-hidden border-b border-gray bg-slate px-4 py-4 transition-all"
-                @mouseenter="tagContainer.style.maxHeight = maxContainerHeight"
+                class="absolute left-0 top-0 z-10 flex max-h-[50px] w-full flex-wrap gap-y-2 overflow-hidden border-b border-gray bg-slate px-4 py-4 transition-all"
+                @mouseenter="handleEnter"
                 @mouseleave="handleLeave">
                 <p class="flex w-full flex-wrap"><span class="text-primary">#</span>subjects</p>
                 <Pill
@@ -26,7 +26,7 @@
                     >{{ tag }}</Pill
                 >
             </div>
-            <NuxtLink :to="`/blogs/${blog.slug}`" class="mb-4 block pt-32">
+            <NuxtLink :to="`/blogs/${blog.slug}`" class="mb-4 block pt-[50px]">
                 <HeaderBlock :trim="true" :title="blog.title" :sub-title="blog.description" />
             </NuxtLink>
         </article>
@@ -45,9 +45,14 @@ const { viewportSize } = useViewportSize();
 const tagContainer = ref<HTMLElement | null>(null);
 const maxContainerHeight = ref<string>('');
 
+const handleEnter = () => {
+    if (tagContainer.value) {
+        tagContainer.value.style.maxHeight = maxContainerHeight.value;
+    }
+};
 const handleLeave = () => {
     if (tagContainer.value) {
-        tagContainer.value.style.maxHeight = '132px';
+        tagContainer.value.style.maxHeight = '50px';
     }
 };
 
@@ -77,4 +82,3 @@ article {
     }
 }
 </style>
-

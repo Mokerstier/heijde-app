@@ -7,7 +7,8 @@
                 sub-title="Whats on my mind, read all about it here" />
         </section>
         <section class="container sticky top-0 z-20 !py-0">
-            <div class="flex flex-wrap items-center gap-y-2 border-b border-gray bg-slate py-2">
+            <div
+                class="-mt-3 flex flex-wrap items-center gap-y-2 border-y border-gray bg-slate pb-3 pt-2">
                 <h3 class="w-full">Filters</h3>
                 <Pill
                     @click="() => updateFilter(af)"
@@ -41,6 +42,7 @@
                     v-show="activeFilters.length > 0"
                     variant="primary"
                     @click="activeFilters = []"
+                    size="small"
                     class="ml-auto">
                     Clear filters
                 </Button>

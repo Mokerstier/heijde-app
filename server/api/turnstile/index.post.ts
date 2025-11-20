@@ -1,14 +1,13 @@
 import { verifyTurnstileToken } from '@nuxtjs/turnstile/runtime/server/utils/verify.js';
 
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event);
+    const { token } = await readBody(event);
 
-    if (!body) {
+    if (!token) {
         throw createError({
             statusCode: 422,
             statusMessage: 'Token not provided.',
         });
     }
-
-    return await verifyTurnstileToken(body.token);
+    return await verifyTurnstileToken(token);
 });

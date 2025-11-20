@@ -7,7 +7,6 @@ export const animateHeader = (root: HTMLSpanElement | null) => {
     const tl = gsap.timeline();
 
     if (lightningPaths.length > 0) {
-        console.log('lightningPaths', lightningPaths);
         lightningPaths.forEach((lightningPath, index) => {
             gsap.killTweensOf(lightningPath);
 

@@ -11,7 +11,6 @@ export const transformObjectToArray = <T extends { [key: string]: string }>(obj:
 };
 
 export const enrichLanguagesObject = (languages: RepoLanguages): EnrichedLanguage[] => {
-    console.log(languages);
     return Object.keys(languages).map((key) => {
         return {
             name: key,
@@ -25,8 +24,6 @@ export const transformRepoOutline = (
     languages: RepoLanguages,
     image?: FileDetails
 ): RepoOutline => {
-    // const enrichedLanguages = enrichLanguagesObject(languages);
-
     return {
         name: repo.name,
         description: repo.description,

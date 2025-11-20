@@ -30,7 +30,7 @@ export default defineNuxtConfig({
         },
         public: {
             turnstile: {
-                secretKey: process.env.CLOUDFLARE_SECRET,
+                secretKey: process.env.CLOUDFLARE_KEY,
             },
         },
     },

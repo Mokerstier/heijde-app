@@ -5,11 +5,14 @@
         </section>
         <section class="container grid gap-4 text-gray lg:grid-cols-2">
             <div class="flex flex-col gap-4">
-                <p>
-                    I’d love to hear from you! Whether you have a project in mind, a question, or
-                    just want to say hello, feel free to drop me a message.
-                </p>
-                <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
+                <form
+                    v-if="submissionMessage === null"
+                    class="flex flex-col gap-4"
+                    @submit.prevent="handleSubmit">
+                    <p>
+                        I’d love to hear from you! Whether you have a project in mind, a question,
+                        or just want to say hello, feel free to drop me a message.
+                    </p>
                     <div class="flex flex-col gap-2">
                         <label for="name" class="text-sm font-medium">Your Name</label>
                         <input
@@ -48,6 +51,7 @@
                         Send Message
                     </Button>
                 </form>
+                <h4 v-else>{{ submissionMessage }}</h4>
             </div>
             <div class="relative flex items-center justify-center">
                 <SvgComponent class="absolute left-20 top-6 h-21" icon="Dots" />
@@ -101,7 +105,7 @@ const body = ref({
 });
 
 const errorMessage = ref<string | null>();
-const submissionMessage = ref<string | null>();
+const submissionMessage = ref<string | null>(null);
 
 const mail = useMail();
 const handleSubmit = async (event: Event) => {
@@ -112,7 +116,7 @@ const handleSubmit = async (event: Event) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(body.value.token),
+            body: JSON.stringify(body.value),
         });
         const captcha = await captchaResponse.json();
 
@@ -124,6 +128,11 @@ const handleSubmit = async (event: Event) => {
                 subject: `Received an email from ${body.value.email}`,
                 text: body.value.message,
             });
+            body.value.name = '';
+            body.value.email = '';
+            body.value.message = '';
+            submissionMessage.value =
+                'Thank you for reaching out! I will get back to you as soon as possible.';
         } else {
             // Handle CAPTCHA validation error
             errorMessage.value = 'CAPTCHA validation failed. Please try again.';

@@ -137,6 +137,10 @@ const htmlTag = computed(() => (asLink ? resolveComponent('NuxtLink') : 'button'
             @apply text-white;
         }
     }
+
+    &--small {
+        @apply px-3 py-1 text-sm;
+    }
 }
 
 @keyframes rotate {
