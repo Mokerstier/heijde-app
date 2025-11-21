@@ -45,7 +45,7 @@
                     </div>
                     <NuxtTurnstile
                         v-model="token"
-                        :sitekey="config.public.turnstile.siteKey"
+                        sitekey="0x4AAAAAAA5HcHsNNawkKi6t"
                         appearance="interaction-only" />
                     <Button
                         variant="primary"
@@ -105,7 +105,6 @@ const body = ref({
 });
 
 const token = ref();
-const config = useRuntimeConfig();
 
 const errorMessage = ref<string | null>();
 const submissionMessage = ref<string | null>(null);
