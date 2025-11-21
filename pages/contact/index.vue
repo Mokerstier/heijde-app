@@ -43,7 +43,10 @@
                             class="border-gray-300 rounded-md border p-2 focus:outline-primary"
                             required></textarea>
                     </div>
-                    <NuxtTurnstile v-model="body.token" appearance="interaction-only" />
+                    <NuxtTurnstile
+                        v-model="token"
+                        :sitekey="config.public.turnstile.siteKey"
+                        appearance="interaction-only" />
                     <Button
                         variant="primary"
                         type="submit"
@@ -95,33 +98,31 @@ useHead({
     ],
 });
 
-const config = useRuntimeConfig();
-
 const body = ref({
     name: '',
     email: '',
     message: '',
-    token: config.public.turnstile.secretKey as string,
 });
+
+const token = ref();
+const config = useRuntimeConfig();
 
 const errorMessage = ref<string | null>();
 const submissionMessage = ref<string | null>(null);
 
 const mail = useMail();
 const handleSubmit = async (event: Event) => {
+    console.log(token.value);
     try {
         // Send the token to the CAPTCHA validation API first
-        const captchaResponse = await fetch(`/api/turnstile`, {
+        const captchaResponse = await $fetch(`/_turnstile/validate`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body.value),
+            body: { token: token.value },
         });
-        const captcha = await captchaResponse.json();
-
+        // const captcha = await captchaResponse.json();
+        console.log(captchaResponse);
         // If the CAPTCHA validation is successful (status 200), submit the form
-        if (captcha.success) {
+        if (captchaResponse.success) {
             // Prepare form data for submission
             mail.send({
                 from: body.value.name,

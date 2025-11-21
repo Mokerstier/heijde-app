@@ -12,7 +12,7 @@ export default defineNuxtConfig({
             pathPrefix: false,
         },
     ],
-    turnstile: { siteKey: process.env.CLOUDFLARE_KEY },
+    turnstile: { siteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY, addValidateEndpoint: true },
     runtimeConfig: {
         GITHUB_TOKEN: process.env.GITHUB_TOKEN,
         mail: {
@@ -30,7 +30,8 @@ export default defineNuxtConfig({
         },
         public: {
             turnstile: {
-                secretKey: process.env.CLOUDFLARE_KEY,
+                secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY,
+                siteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY,
             },
         },
     },
