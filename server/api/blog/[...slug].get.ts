@@ -1,4 +1,4 @@
-export default defineEventHandler(async (event) => {
+export default eventHandler(async (event) => {
     const slug = getRouterParam(event, 'slug');
     try {
         const blog = await Blog.findOne({ slug: slug });
@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
         throw createError({
             statusCode: 400,
             statusMessage: 'Failed to fetch blogs',
-            message: error.message,
+            message: (error as Error).message,
         });
     }
 });

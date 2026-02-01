@@ -1,10 +1,10 @@
-import { PageSchema } from '~/server/models/page.schema';
+import { PageSchema } from '#shared/models/page.schema';
 
-export default defineEventHandler(async (event) => {
+export default eventHandler(async (event) => {
     const slug = event.context.params?.slug;
     try {
-         return await PageSchema.findOne({alias: slug});
+        return await PageSchema.findOne({ alias: slug });
     } catch (error) {
         return error;
-    } 
+    }
 });

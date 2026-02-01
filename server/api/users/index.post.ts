@@ -1,10 +1,11 @@
-import { UserSchema } from '~/server/models/user.schema';
+import { UserSchema } from '#shared/models/user.schema';
+import { eventHandler, readBody, createError } from 'h3'
 interface IRequestBody {
     email: string;
     password: string;
     name: string;
 }
-export default defineEventHandler(async (event) => {
+export default eventHandler(async (event) => {
     const { email, password, name } = await readBody<IRequestBody>(event);
 
     const newUserData = await UserSchema.create({

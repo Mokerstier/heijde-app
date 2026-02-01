@@ -2,6 +2,7 @@ import svgLoader from 'vite-svg-loader';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    rootDir: '.',
     app: {
         pageTransition: { name: 'page', mode: 'out-in' },
     },
@@ -17,7 +18,7 @@ export default defineNuxtConfig({
         GITHUB_TOKEN: process.env.GITHUB_TOKEN,
         mail: {
             message: {
-                to: process.env.MAIL_PERSONAL,
+                to: process.env.MAIL_PERSONAL ?? '',
             },
             smtp: {
                 host: 'smtp.gmail.com',
