@@ -1,8 +1,8 @@
 <template>
     <div
-        class="absolute bottom-0 left-1/2 z-20 flex w-full -translate-x-1/2 items-center border border-gray bg-slate/80 p-2 backdrop-blur-3xl lg:min-w-fit">
-        <span class="mr-2 block h-4 w-4 flex-shrink-0 bg-primary" />
-        <p class="flex flex-wrap items-center text-gray lg:whitespace-nowrap">
+        class="absolute bottom-0 left-1/2 z-20 flex w-full -translate-x-1/2 items-center border border-line bg-ink/90 p-2 lg:min-w-fit">
+        <span class="mr-2 block h-4 w-4 shrink-0 bg-primary" />
+        <p class="flex flex-wrap items-center text-muted lg:whitespace-nowrap">
             <span class="mr-[1em]">
                 {{ label }}
             </span>

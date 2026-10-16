@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <div ref="root">
         <section class="container">
             <HeaderBlock
                 :prefix="header?.prefix"
                 :title="header?.title"
                 :sub-title="header?.subTitle"></HeaderBlock>
         </section>
-        <section class="container grid gap-4 text-gray lg:grid-cols-2">
-            <div class="flex flex-col gap-4">
+        <section class="container grid gap-4 text-muted lg:grid-cols-2">
+            <div class="bio flex flex-col gap-4">
                 <p>Hey there! I’m Wouter,</p>
                 <p>
                     a passionate Front-End Developer with a love for crafting sleek, user-friendly
@@ -34,12 +34,12 @@
                 </p>
             </div>
             <div class="relative flex items-center justify-center">
-                <SvgComponent class="absolute left-20 top-6 h-21" icon="Dots" />
+                <SvgComponent class="absolute top-6 left-20 h-21" icon="Dots" />
                 <NuxtImg
                     fit="contain"
                     class="max-h-[500px] max-w-full scale-x-[-1] border-b border-b-primary lg:min-h-[500px] lg:min-w-max"
                     src="/images/wouter-mila-no-bg.png"></NuxtImg>
-                <SvgComponent class="absolute right-16 top-2/3 h-21" icon="Dots" />
+                <SvgComponent class="absolute top-2/3 right-16 h-21" icon="Dots" />
             </div>
         </section>
         <FunFacts />
@@ -47,9 +47,52 @@
 </template>
 <script setup lang="ts">
 import type { ContentHeader, ContentSection } from '#shared/models/page.schema';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
 import { getElementByType } from '~/utils/getElementByType';
 
 const data = await usePageData('about-me');
+
+const root = ref<HTMLElement | null>(null);
+
+// The bio lights up word by word while scrolling, and the portrait drifts slightly.
+useGsap(root, ({ gsap, reducedMotion }) => {
+    if (reducedMotion) return;
+
+    gsap.utils.toArray<HTMLElement>('.bio p', root.value).forEach((paragraph) => {
+        const split = SplitText.create(paragraph, { type: 'words', aria: 'auto' });
+        gsap.from(split.words, {
+            opacity: 0.15,
+            ease: 'none',
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: paragraph,
+                start: 'top 85%',
+                end: 'bottom 55%',
+                scrub: true,
+            },
+        });
+    });
+
+    const portrait = root.value?.querySelector<HTMLElement>('img');
+    if (portrait) {
+        gsap.fromTo(
+            portrait,
+            { yPercent: 6 },
+            {
+                yPercent: -6,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: portrait,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true,
+                },
+            }
+        );
+    }
+    ScrollTrigger.refresh();
+});
 
 const header = ref<ContentHeader | undefined>();
 const contentSection = ref<ContentSection | undefined>();
@@ -70,3 +113,4 @@ onMounted(() => {
     contentSection.value = getElementByType(data.value.template);
 });
 </script>
+

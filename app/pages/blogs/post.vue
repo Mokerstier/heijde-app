@@ -6,49 +6,49 @@
             class="mr-auto mt-4 flex max-w-4xl flex-col gap-3 text-black lg:mx-auto">
             <h1 class="text-2xl text-white lg:mx-auto">Create a new blog post</h1>
             <div class="mb-4">
-                <label for="title" class="block text-sm font-medium text-gray">Title</label>
+                <label for="title" class="block text-sm font-medium text-muted">Title</label>
                 <input
                     type="text"
                     id="title"
                     v-model="body.title"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
+                    class="border-line-300 mt-1 block w-full rounded-md p-2 shadow-xs focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
             </div>
             <div class="mb-4">
-                <label for="title" class="block text-sm font-medium text-gray">Image</label>
+                <label for="title" class="block text-sm font-medium text-muted">Image</label>
                 <input
                     type="text"
                     id="title"
                     v-model="body.image"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
+                    class="border-line-300 mt-1 block w-full rounded-md p-2 shadow-xs focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
             </div>
             <div class="mb-4">
-                <label for="content" class="block text-sm font-medium text-gray">Content</label>
+                <label for="content" class="block text-sm font-medium text-muted">Content</label>
                 <textarea
                     id="content"
                     v-model="body.content"
                     required
-                    class="border-gray-300 mt-1 block min-h-40 w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
+                    class="border-line-300 mt-1 block min-h-40 w-full rounded-md p-2 shadow-xs focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
             </div>
             <div class="mb-4">
-                <label for="description" class="block text-sm font-medium text-gray"
+                <label for="description" class="block text-sm font-medium text-muted"
                     >Description</label
                 >
                 <textarea
                     id="description"
                     v-model="body.description"
                     required
-                    class="border-gray-300 mt-1 block min-h-10 w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
+                    class="border-line-300 mt-1 block min-h-10 w-full rounded-md p-2 shadow-xs focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
             </div>
             <div class="mb-4">
-                <label for="tags" class="block text-sm font-medium text-gray">Tags</label>
+                <label for="tags" class="block text-sm font-medium text-muted">Tags</label>
                 <input
                     v-for="index in tagCount"
                     type="text"
                     id="tags-{{ index }}"
                     v-model="body.tags[index - 1]"
-                    class="border-gray-300 mt-1 block w-full rounded-md p-2 shadow-sm focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
+                    class="border-line-300 mt-1 block w-full rounded-md p-2 shadow-xs focus:border-indigo-500 focus:outline-primary focus:ring-indigo-500 sm:text-sm" />
                 <Button class="mt-4" variant="primary" @click.prevent="tagCount = tagCount + 1">
                     Add another tag
                 </Button>

@@ -1,15 +1,16 @@
 <template>
-    <section>
+    <section ref="root">
         <section class="container !pb-8">
             <HeaderBlock
                 prefix="/"
                 title="blogs"
                 sub-title="Whats on my mind, read all about it here" />
         </section>
-        <section class="container sticky top-0 z-20 !py-0">
+        <section ref="filterBar" class="relative z-20 container !py-0">
             <div
-                class="-mt-3 flex flex-wrap items-center gap-y-2 border-y border-gray bg-slate pb-3 pt-2">
-                <h3 class="w-full">Filters</h3>
+                role="group"
+                aria-label="Filter by topic"
+                class="-mt-3 flex flex-wrap items-center gap-y-2 border-y border-line bg-ink py-3">
                 <Pill
                     @click="() => updateFilter(af)"
                     v-for="af in filters.slice(0, 5)"
@@ -48,7 +49,7 @@
                 </Button>
             </div>
         </section>
-        <section class="mt container grid gap-2 !pt-8 lg:grid-cols-3">
+        <section ref="list" class="container grid gap-2 !pt-8 md:grid-cols-2 lg:grid-cols-3">
             <TransitionGroup name="fade">
                 <BlogCard
                     v-for="blog in blogsOutline"
@@ -61,6 +62,7 @@
     </section>
 </template>
 <script lang="ts" setup>
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { BlogOutline } from '#shared/models/blog.model';
 
 useHead({
@@ -81,6 +83,23 @@ const { blogsOutline, filters } = data.value;
 const activeFilters = ref<string[]>([]);
 
 const showMoreFilters = ref(false);
+
+const root = ref<HTMLElement | null>(null);
+const filterBar = ref<HTMLElement | null>(null);
+const list = ref<HTMLElement | null>(null);
+
+// `position: sticky` doesn't survive ScrollSmoother's transformed content, so pin instead.
+useGsap(root, () => {
+    ScrollTrigger.create({
+        trigger: filterBar.value,
+        // Stick just below the fixed main navigation.
+        start: () => `top ${document.getElementById('main-nav')?.offsetHeight ?? 0}px`,
+        endTrigger: list.value,
+        end: 'bottom top',
+        pin: true,
+        pinSpacing: false,
+    });
+});
 
 const updateFilter = (tag: string) => {
     if (activeFilters.value.includes(tag)) {

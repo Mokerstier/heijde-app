@@ -3,35 +3,35 @@
         <HeaderBlock prefix="/" title="blogs" sub-title="Under construction" />
         <form @submit.prevent="submitForm" class="text-black">
             <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray">Email</label>
+                <label for="email" class="block text-sm font-medium text-muted">Email</label>
                 <input
                     type="email"
                     id="email"
                     v-model="form.email"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:outline-primary sm:text-sm" />
+                    class="border-line-300 mt-1 block w-full rounded-md shadow-xs focus:outline-primary sm:text-sm" />
             </div>
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray">Name</label>
+                <label for="name" class="block text-sm font-medium text-muted">Name</label>
                 <input
                     type="text"
                     id="name"
                     v-model="form.name"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:outline-primary sm:text-sm" />
+                    class="border-line-300 mt-1 block w-full rounded-md shadow-xs focus:outline-primary sm:text-sm" />
             </div>
             <div class="mb-4">
-                <label for="password" class="block text-sm font-medium text-gray">Password</label>
+                <label for="password" class="block text-sm font-medium text-muted">Password</label>
                 <input
                     type="password"
                     id="password"
                     v-model="form.password"
                     required
-                    class="border-gray-300 mt-1 block w-full rounded-md shadow-sm focus:outline-primary sm:text-sm" />
+                    class="border-line-300 mt-1 block w-full rounded-md shadow-xs focus:outline-primary sm:text-sm" />
             </div>
             <button
                 type="submit"
-                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2">
+                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-xs hover:bg-indigo-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2">
                 Submit
             </button>
         </form>

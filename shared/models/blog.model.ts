@@ -15,6 +15,7 @@ export interface BlogOutline {
     description: string;
     tags: string[];
     slug: string;
+    image?: string;
 }
 
 export const Blog = defineMongooseModel<IBlog>(

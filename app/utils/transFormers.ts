@@ -41,6 +41,7 @@ export const transformBlog = (blog: IBlog): BlogOutline => {
         description: blog.description,
         tags: blog.tags,
         slug: blog.slug,
+        image: blog.image,
     };
 };
 

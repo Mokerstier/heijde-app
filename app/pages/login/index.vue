@@ -4,7 +4,7 @@
             <h1 class="text-4xl font-bold">Login</h1>
             <form @submit.prevent="handleLogin" class="mt-8 flex flex-col gap-3 text-black">
                 <div class="flex flex-col gap-1">
-                    <label class="text-gray" for="email">Email</label>
+                    <label class="text-muted" for="email">Email</label>
                     <input
                         v-model="credentials.email"
                         class="input-field"
@@ -13,7 +13,7 @@
                         id="email" />
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="text-gray" for="email">Password</label>
+                    <label class="text-muted" for="email">Password</label>
                     <input
                         v-model="credentials.password"
                         class="input-field"
@@ -56,7 +56,8 @@ const handleLogin = async () => {
   }
 };
 </script>
-<style scoped lang="scss">
+<style scoped>
+@reference '~/assets/css/main.css';
 .input-field {
     @apply p-2 focus:outline-primary;
 }

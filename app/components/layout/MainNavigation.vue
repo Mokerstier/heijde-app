@@ -1,16 +1,25 @@
 <template>
     <div
+        id="main-nav"
         ref="mainNav"
-        class="relative border-b transition-colors"
+        class="fixed inset-x-0 top-0 z-50 border-b bg-ink/95 transition-colors"
         :class="{
-            'border-b-gray/75 delay-500': menuIsOpen,
-            'border-b-slate delay-0': !menuIsOpen,
+            'border-b-line/75 delay-500': menuIsOpen,
+            'border-b-ink delay-0': !menuIsOpen,
         }">
         <nav class="container pb-2 pt-4 lg:pt-8">
-            <ul class="flex gap-x-8">
+            <ul class="flex items-center gap-x-8">
                 <li>
-                    <NuxtLink class="flex items-center gap-x-3" to="/">
-                        <NuxtImg class="h-4 w-4" src="W-logo-light.svg" /> Wouter
+                    <NuxtLink class="flex items-center gap-x-3" to="/" @pointerenter="onLogoEnter">
+                        <span ref="logoWrap" class="relative flex h-10 w-10 items-center justify-center">
+                            <ClientOnly>
+                                <LazyNavLogo class="absolute inset-0 h-full w-full" />
+                                <template #fallback>
+                                    <NuxtImg class="h-4 w-4" src="W-logo-light.svg" />
+                                </template>
+                            </ClientOnly>
+                        </span>
+                        Wouter
                     </NuxtLink>
                 </li>
                 <li
@@ -22,7 +31,7 @@
                         :as-link="true"
                         variant="navigation"
                         active-class="active"
-                        class="group text-gray"
+                        class="group text-muted"
                         :class="isNestedActive(link.to)"
                         :to="link.to">
                         <span>
@@ -51,10 +60,6 @@
                     </button>
                 </li>
             </ul>
-            <SvgComponent
-                id="lightning-root"
-                icon="Electric-line"
-                class="pointer-events-none absolute left-1/2 top-0 w-full -translate-x-1/2 -translate-y-1/2 opacity-0" />
             <MobileNavigation :menu-is-open="menuIsOpen" />
         </nav>
     </div>
@@ -62,12 +67,14 @@
 
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
+import { burst } from '~/utils/lightning';
 
 const route = useRoute();
 const routes = useNavigation();
 
 const menuIsOpen = ref(false);
 const mainNav = ref<HTMLElement | null>(null);
+const logoWrap = ref<HTMLElement | null>(null);
 
 const navigationLinksRef = useTemplateRef('items');
 
@@ -100,7 +107,18 @@ watch(
     }
 );
 
+// Hovering the logo shoots a ring of small bolts out of it (mouse/pen only, and not
+// again while the previous ring is still firing).
+let bursting = false;
+const onLogoEnter = (event: PointerEvent) => {
+    if (bursting || event.pointerType === 'touch' || !logoWrap.value) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    bursting = true;
+    burst(logoWrap.value)?.eventCallback('onComplete', () => (bursting = false));
+};
+
 onMounted(() => {
+
     document.documentElement.style.setProperty(
         '--nav-height',
         `${mainNav.value?.getBoundingClientRect().height ?? 48 + 1}px`
@@ -116,13 +134,3 @@ onMounted(() => {
     animateNavigation(navigationLinksRef.value);
 });
 </script>
-<style lang="scss">
-.spark {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    opacity: 0.8;
-    border-radius: 100%;
-}
-</style>

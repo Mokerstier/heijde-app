@@ -8,7 +8,8 @@ defineProps<{
     content: string;
 }>();
 </script>
-<style lang="scss">
+<style>
+@reference '~/assets/css/main.css';
 .markdown {
     @apply mx-auto max-w-2xl;
 
@@ -26,7 +27,7 @@ defineProps<{
     }
 
     p {
-        @apply mb-4 text-gray;
+        @apply mb-4 text-muted;
     }
 
     a {

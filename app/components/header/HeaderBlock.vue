@@ -9,80 +9,88 @@
         <span
             v-if="showBorder"
             class="animate-border header-animation relative h-[1px] w-full bg-primary">
-            <SvgComponent
-                icon="Electric-line-stretch"
-                class="pointer-events-none absolute top-0 h-16 w-full -translate-y-1/2" />
-            <SvgComponent
-                icon="Electric-line-stretch-blue"
-                class="pointer-events-none absolute top-0 h-16 w-full -translate-y-1/2" />
+            <!-- Shimmer is a translated gradient (compositor-only), not an animated background-position. -->
+            <span class="absolute inset-0 overflow-hidden" aria-hidden="true"
+                ><span class="glow-slide block h-full w-[300%]"
+            /></span>
         </span>
 
         <NuxtLink v-if="link" :to="link.url" class="ml-auto">{{ link.label }}</NuxtLink>
     </header>
     <span
         v-if="subTitle"
-        class="mt-3 text-gray"
+        class="mt-3 text-muted"
         :class="{ 'mt-auto line-clamp-4': trim, 'block': !trim }"
         >{{ subTitle }}</span
     >
 </template>
 <script lang="ts" setup>
 import type { ContentHeader } from '#shared/models/page.schema';
-import { animateHeader } from '~/utils/headerAnimation';
+
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { zap } from '~/utils/lightning';
 
 defineProps<ContentHeader>();
 
 const headerBlock = ref<HTMLElement | null>(null);
-const isInView = ref(false);
 
-onMounted(() => {
-    const root = document.querySelector('.header-animation') as HTMLSpanElement;
-    if (root === null) return;
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    isInView.value = true;
-                    animateHeader(root);
-                } else {
-                    isInView.value = false;
-                }
-            });
-        },
-        { threshold: 0.1 } // Adjust the threshold as needed
-    );
+// When the header scrolls into view the rule grows from the left and a bolt strikes
+// along it. While the header stays in view it keeps zapping now and then.
+useGsap(headerBlock, ({ gsap, reducedMotion }) => {
+    const line = headerBlock.value?.querySelector<HTMLElement>('.header-animation');
+    if (!line || reducedMotion) return;
 
-    if (headerBlock.value) {
-        observer.observe(headerBlock.value);
-    }
+    let inView = false;
+    let timer: number | undefined;
+    const idleZap = () => {
+        timer = window.setTimeout(
+            () => {
+                if (inView) zap(line);
+                idleZap();
+            },
+            6000 + Math.random() * 6000
+        );
+    };
+
+    gsap.timeline({
+        scrollTrigger: { trigger: headerBlock.value, start: 'top 90%', once: true },
+    })
+        .from(line, { scaleX: 0, transformOrigin: 'left center', duration: 0.9, ease: 'power3.out' })
+        .call(() => zap(line), [], 0.5);
+
+    ScrollTrigger.create({
+        trigger: headerBlock.value,
+        start: 'top 95%',
+        end: 'bottom 5%',
+        onToggle: (self) => (inView = self.isActive),
+    });
+    idleZap();
+
+    return () => window.clearTimeout(timer);
 });
 </script>
 <style scoped lang="scss">
-.animate-border {
+.glow-slide {
     background-image: linear-gradient(
         to left,
         #187adc,
-        #3488dc 30%,
+        #3d7bff 30%,
         #ffffff 45%,
-        #3488dc,
+        #3d7bff,
         #ffffff 55%,
-        #3488dc 70%,
+        #3d7bff 70%,
         #187adc
     );
-    background-size: 300%;
-    animation: background-shift 5s infinite;
-
-    path {
-        stroke: transparent;
-    }
+    animation: glow-slide 5s linear infinite;
+    will-change: transform;
 }
 
-@keyframes background-shift {
-    0% {
-        background-position: 100%;
+@keyframes glow-slide {
+    from {
+        transform: translateX(-66.667%);
     }
-    100% {
-        background-position: 0%;
+    to {
+        transform: translateX(0);
     }
 }
 </style>

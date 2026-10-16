@@ -1,9 +1,6 @@
 <template>
     <div>
         <HomeHero />
-        <section class="container">
-            <Quote></Quote>
-        </section>
         <SkillBlock
             v-bind="
                 data.template.find((element) => element.alias === 'SkillBlock') as SkillBlock

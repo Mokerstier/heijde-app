@@ -3,44 +3,45 @@
         <section class="container">
             <HeaderBlock prefix="/" title="Contact Me" sub-title="Let's Connect"></HeaderBlock>
         </section>
-        <section class="container grid gap-4 text-gray lg:grid-cols-2">
+        <section class="container grid gap-4 text-muted lg:grid-cols-2">
             <div class="flex flex-col gap-4">
                 <form
                     v-if="submissionMessage === null"
+                    ref="formEl"
                     class="flex flex-col gap-4"
                     @submit.prevent="handleSubmit">
                     <p>
                         I’d love to hear from you! Whether you have a project in mind, a question,
                         or just want to say hello, feel free to drop me a message.
                     </p>
-                    <div class="flex flex-col gap-2">
+                    <div class="field flex flex-col gap-2">
                         <label for="name" class="text-sm font-medium">Your Name</label>
                         <input
                             v-model="body.name"
                             type="text"
                             id="name"
                             name="name"
-                            class="border-gray-300 rounded-md border p-2 focus:outline-primary"
+                            class="field-input border border-line bg-ink p-2 text-white outline-none"
                             required />
                     </div>
-                    <div class="flex flex-col gap-2">
+                    <div class="field flex flex-col gap-2">
                         <label for="email" class="text-sm font-medium">Your Email</label>
                         <input
                             v-model="body.email"
                             type="email"
                             id="email"
                             name="email"
-                            class="border-gray-300 rounded-md border p-2 focus:outline-primary"
+                            class="field-input border border-line bg-ink p-2 text-white outline-none"
                             required />
                     </div>
-                    <div class="flex flex-col gap-2">
+                    <div class="field flex flex-col gap-2">
                         <label for="message" class="text-sm font-medium">Your Message</label>
                         <textarea
                             v-model="body.message"
                             id="message"
                             name="message"
                             rows="4"
-                            class="border-gray-300 rounded-md border p-2 focus:outline-primary"
+                            class="field-input border border-line bg-ink p-2 text-white outline-none"
                             required></textarea>
                     </div>
                     <NuxtTurnstile
@@ -53,8 +54,23 @@
                         class="hover:bg-primary-dark self-start rounded-md bg-primary px-4 py-2 text-white">
                         Send Message
                     </Button>
+                    <p v-if="errorMessage" role="alert" class="text-red-400">
+                        {{ errorMessage }}
+                    </p>
                 </form>
-                <h4 v-else>{{ submissionMessage }}</h4>
+                <div v-else ref="successEl" role="status" class="flex items-center gap-4">
+                    <svg
+                        class="h-16 w-16 shrink-0 text-primary"
+                        viewBox="0 0 52 52"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        aria-hidden="true">
+                        <circle class="success-circle" cx="26" cy="26" r="23" />
+                        <path class="success-check" d="M15 27l8 8 15-17" />
+                    </svg>
+                    <h4 class="success-text">{{ submissionMessage }}</h4>
+                </div>
             </div>
             <div class="relative flex items-center justify-center">
                 <SvgComponent class="absolute left-20 top-6 h-21" icon="Dots" />
@@ -88,6 +104,8 @@
 </template>
 
 <script lang="ts" setup>
+import gsap from 'gsap';
+
 useHead({
     title: 'Contact | Wouter van der Heijde',
     meta: [
@@ -109,8 +127,39 @@ const token = ref();
 const errorMessage = ref<string | null>();
 const submissionMessage = ref<string | null>(null);
 
+const formEl = ref<HTMLFormElement | null>(null);
+const successEl = ref<HTMLElement | null>(null);
+
+const prefersReducedMotion = () =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Success: the checkmark draws itself and the message slides in.
+watch(submissionMessage, async (message) => {
+    if (message === null || prefersReducedMotion()) return;
+    await nextTick();
+    if (!successEl.value) return;
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .from('.success-circle', { drawSVG: 0, duration: 0.7 })
+        .from('.success-check', { drawSVG: 0, duration: 0.4 }, '>-0.1')
+        .from('.success-text', { autoAlpha: 0, x: -16, duration: 0.5 }, '<');
+});
+
+// Error: shake the form instead of a blocking alert().
+watch(errorMessage, async (message) => {
+    if (!message || prefersReducedMotion()) return;
+    await nextTick();
+    if (formEl.value) {
+        gsap.fromTo(
+            formEl.value,
+            { x: -10 },
+            { x: 0, duration: 0.6, ease: 'elastic.out(1, 0.25)', clearProps: 'transform' }
+        );
+    }
+});
+
 const mail = useMail();
 const handleSubmit = async (event: Event) => {
+    errorMessage.value = null;
     console.log(token.value);
     try {
         // Send the token to the CAPTCHA validation API first
@@ -136,14 +185,32 @@ const handleSubmit = async (event: Event) => {
         } else {
             // Handle CAPTCHA validation error
             errorMessage.value = 'CAPTCHA validation failed. Please try again.';
-            alert(errorMessage.value);
             submissionMessage.value = null;
         }
     } catch (error) {
         console.error('Submission error:', error);
         errorMessage.value = 'An error occurred while submitting the form.';
         submissionMessage.value = null; // Clear previous messages
-        alert(errorMessage.value); // Show error alert
     }
 };
 </script>
+<style scoped>
+.field label {
+    transition:
+        color 0.25s,
+        transform 0.25s;
+}
+.field:focus-within label {
+    color: var(--color-primary);
+    transform: translateX(6px);
+}
+.field-input {
+    transition:
+        border-color 0.25s,
+        box-shadow 0.25s;
+}
+.field-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-primary) 30%, transparent);
+}
+</style>

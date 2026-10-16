@@ -1,6 +1,11 @@
 <template>
-    <div>
-        <aside class="aside m-w-max absolute left-0 top-0 z-10 hidden p-4 text-gray md:block">
+    <div ref="root">
+        <!-- ScrollSmoother transforms #smooth-content: keep fixed UI outside it, and use
+             ScrollTrigger pins instead of `position: sticky` inside it. -->
+        <!-- Fixed nav lives outside #smooth-content: ScrollSmoother transforms that element,
+             which would break position: fixed/sticky inside it. -->
+        <MainNavigation />
+        <aside class="aside m-w-max fixed left-0 top-(--nav-height) z-10 hidden p-4 text-muted md:block">
             <ul>
                 <li>
                     <NuxtLink
@@ -20,19 +25,42 @@
                 </li>
             </ul>
         </aside>
-        <MainNavigation />
-        <slot />
-        <MainFooter />
+        <div id="smooth-wrapper" ref="wrapper">
+            <div id="smooth-content" ref="content">
+                <div class="pt-(--nav-height)">
+                    <slot />
+                </div>
+                <MainFooter />
+            </div>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+
 useHead({
     htmlAttrs: {
         lang: 'en',
     },
 });
+
+const root = ref<HTMLElement | null>(null);
+const wrapper = ref<HTMLElement | null>(null);
+const content = ref<HTMLElement | null>(null);
+
+useGsap(root, ({ reducedMotion }) => {
+    ScrollSmoother.create({
+        wrapper: wrapper.value!,
+        content: content.value!,
+        smooth: reducedMotion ? 0 : 1.2,
+        // Enables data-speed / data-lag parallax attributes on any element.
+        effects: !reducedMotion,
+        smoothTouch: false,
+    });
+});
 </script>
 <style>
+@reference '~/assets/css/main.css';
 .aside {
     &::before {
         @apply block h-16 lg:h-40;
@@ -42,15 +70,5 @@ useHead({
         margin-top: -16px;
         background-color: currentColor;
     }
-}
-
-.page-enter-active,
-.page-leave-active {
-    transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-    opacity: 0;
-    filter: blur(1rem);
 }
 </style>
