@@ -54,7 +54,6 @@ export default defineNuxtConfig({
         '@vite-pwa/nuxt',
         'nuxt-mongoose',
         'nuxt-auth-utils',
-        'nuxt-vercel-analytics',
         'nuxt-mail',
         '@nuxtjs/turnstile',
         '@tresjs/nuxt',
