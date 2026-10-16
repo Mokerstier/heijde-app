@@ -40,7 +40,7 @@
     </component>
 </template>
 <script lang="ts" setup>
-import type { Icon } from '@/components/SvgComponent.vue';
+import type { Icon } from '../SvgComponent.vue';
 
 type ButtonVariant = 'primary' | 'secondary' | 'navigation';
 type ButtonSize = 'large' | 'small';
