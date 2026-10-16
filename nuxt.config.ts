@@ -1,10 +1,9 @@
+import tailwindcss from '@tailwindcss/vite';
 import svgLoader from 'vite-svg-loader';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    app: {
-        pageTransition: { name: 'page', mode: 'out-in' },
-    },
+    rootDir: '.',
     compatibilityDate: '2024-04-03',
     components: [
         {
@@ -17,7 +16,7 @@ export default defineNuxtConfig({
         GITHUB_TOKEN: process.env.GITHUB_TOKEN,
         mail: {
             message: {
-                to: process.env.MAIL_PERSONAL,
+                to: process.env.MAIL_PERSONAL ?? '',
             },
             smtp: {
                 host: 'smtp.gmail.com',
@@ -41,18 +40,23 @@ export default defineNuxtConfig({
         devtools: true,
     },
     ssr: true,
-    css: ['@/assets/scss/main.scss'],
+    app: {
+        head: {
+            meta: [{ name: 'theme-color', content: '#0e0b1f' }],
+        },
+    },
+    css: ['@/assets/css/main.css'],
     devtools: { enabled: true },
     modules: [
         '@pinia/nuxt',
-        '@nuxtjs/tailwindcss',
+        '@nuxt/fonts',
         '@nuxt/image',
         '@vite-pwa/nuxt',
         'nuxt-mongoose',
         'nuxt-auth-utils',
-        'nuxt-vercel-analytics',
         'nuxt-mail',
         '@nuxtjs/turnstile',
+        '@tresjs/nuxt',
     ],
     vite: {
         css: {
@@ -63,6 +67,7 @@ export default defineNuxtConfig({
             },
         },
         plugins: [
+            tailwindcss(),
             svgLoader({
                 svgoConfig: {
                     plugins: [
@@ -84,7 +89,7 @@ export default defineNuxtConfig({
 
     pwa: {
         manifest: {
-            theme_color: '#282c33',
+            theme_color: '#0e0b1f',
             display: 'standalone',
             start_url: '/',
             icons: [

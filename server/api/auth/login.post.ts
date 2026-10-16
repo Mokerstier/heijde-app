@@ -1,9 +1,16 @@
 import jwt from 'jsonwebtoken';
+import { UserSchema } from '#shared/models/user.schema';
+import { z } from 'zod';
+
+const bodySchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+})
 
 export default defineEventHandler(async (event) => {
-    const { email, password } = await readBody(event);
+  const { email, password } = await readValidatedBody(event, bodySchema.parse)
     const user = await UserSchema.findOne({ email: email });
-
+    console.log(email, user)
     if (!user) {
         throw createError({
             statusCode: 401,

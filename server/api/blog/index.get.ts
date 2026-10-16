@@ -1,6 +1,7 @@
 import { transformBlog } from '~/utils/transFormers';
+import { Blog } from '~~/shared/models/blog.model';
 
-export default defineEventHandler(async (event) => {
+export default eventHandler(async (event) => {
     try {
         const blogs = await Blog.find();
         const blogsOutline = blogs.map((blog) => transformBlog(blog));
@@ -15,4 +16,3 @@ export default defineEventHandler(async (event) => {
         });
     }
 });
-

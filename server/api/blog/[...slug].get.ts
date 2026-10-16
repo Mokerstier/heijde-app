@@ -1,4 +1,6 @@
-export default defineEventHandler(async (event) => {
+import { Blog } from '~~/shared/models/blog.model';
+
+export default eventHandler(async (event) => {
     const slug = getRouterParam(event, 'slug');
     try {
         const blog = await Blog.findOne({ slug: slug });
@@ -8,7 +10,7 @@ export default defineEventHandler(async (event) => {
         throw createError({
             statusCode: 400,
             statusMessage: 'Failed to fetch blogs',
-            message: error.message,
+            message: (error as Error).message,
         });
     }
 });

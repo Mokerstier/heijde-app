@@ -1,5 +1,5 @@
 {
-    "tailwindStylesheet": "./assets/scss/main.scss",
+    "tailwindStylesheet": "./app/assets/css/main.css",
     "printWidth": 100,
     "tabWidth": 4,
     "useTabs": false,
@@ -15,7 +15,5 @@
     "vueIndentScriptAndStyle": false,
     "singleAttributePerLine": false,
     "endOfLine": "crlf",
-    "plugins": [
-        "prettier-plugin-tailwindcss"
-    ]
+    "plugins": ["prettier-plugin-tailwindcss"]
 }
