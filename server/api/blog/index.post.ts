@@ -1,4 +1,4 @@
-import { IBlog } from '#shared/models/blog.model';
+import { Blog, type IBlog } from '#shared/models/blog.model';
 import { transformSlug } from '~/utils/transFormers';
 
 export default eventHandler(async (event) => {

@@ -1,3 +1,5 @@
+import { Blog } from '~~/shared/models/blog.model';
+
 export default eventHandler(async (event) => {
     const slug = getRouterParam(event, 'slug');
     try {
