@@ -36,7 +36,9 @@ export default defineNuxtConfig({
     },
     mongoose: {
         uri: process.env.NUXT_MONGOOSE_URI,
-        options: {},
+        // Fail fast with a clear error (usually: Atlas IP allowlist or a wrong URI) instead of
+        // hanging until the serverless function times out.
+        options: { serverSelectionTimeoutMS: 5000, connectTimeoutMS: 5000 },
         devtools: true,
     },
     ssr: true,
